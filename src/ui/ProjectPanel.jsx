@@ -1,3 +1,4 @@
+import { useCallback, useEffect } from 'react';
 import {
   ArrowLeft,
   ArrowRight,
@@ -29,10 +30,31 @@ export default function ProjectPanel({ onReturnHub, onSelectPortal }) {
   );
   const project = PROJECTS[currentIndex] || PROJECTS[0];
 
-  const handleStep = (delta) => {
-    const nextIdx = (currentIndex + delta + PROJECTS.length) % PROJECTS.length;
-    selectProject(PROJECTS[nextIdx].id);
-  };
+  const handleStep = useCallback(
+    (delta) => {
+      const nextIdx = (currentIndex + delta + PROJECTS.length) % PROJECTS.length;
+      selectProject(PROJECTS[nextIdx].id);
+    },
+    [currentIndex, selectProject]
+  );
+
+  // Keyboard ArrowLeft / ArrowRight stepping across all 6 project worlds
+  useEffect(() => {
+    const onKeyDown = (event) => {
+      if (event.altKey || event.ctrlKey || event.metaKey) return;
+      const tag = event.target?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        handleStep(1);
+      } else if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        handleStep(-1);
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [handleStep]);
 
   if (panelHidden && viewMode === '3d') {
     return (
@@ -188,7 +210,7 @@ export default function ProjectPanel({ onReturnHub, onSelectPortal }) {
               <a
                 href={project.repoUrl}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="project-repo-link"
               >
                 <Code2 size={15} aria-hidden="true" />
@@ -202,7 +224,7 @@ export default function ProjectPanel({ onReturnHub, onSelectPortal }) {
                 <a
                   href={PROFILE.contact.github}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                 >
                   {PROFILE.contact.githubLabel}
                 </a>

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Html } from '@react-three/drei';
+import { Html } from '@react-three/drei/web/Html';
 import * as THREE from 'three';
 import { SKILL_CATEGORIES } from '../data/skills.js';
 import { useExperienceStore } from '../store/experienceStore.js';

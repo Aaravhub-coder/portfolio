@@ -162,7 +162,7 @@ export default function ContactPanel({ onReturnHub, onReturnGateway }) {
             <a
               href={PROFILE.contact.github}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className={`contact-card contact-card--link ${hoveredContactChannel === 'github' ? 'contact-card--active' : ''}`}
               onMouseEnter={() => setHoveredContactChannel('github')}
               onMouseLeave={() => setHoveredContactChannel(null)}
@@ -192,7 +192,7 @@ export default function ContactPanel({ onReturnHub, onReturnGateway }) {
             <a
               href={PROFILE.contact.linkedin}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className={`contact-card contact-card--link ${hoveredContactChannel === 'linkedin' ? 'contact-card--active' : ''}`}
               onMouseEnter={() => setHoveredContactChannel('linkedin')}
               onMouseLeave={() => setHoveredContactChannel(null)}

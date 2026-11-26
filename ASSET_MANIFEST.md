@@ -28,7 +28,7 @@ Every external or generated media asset (3D models, textures, fonts, audio, icon
 | Cosmic Starfield & Energy Motes | Procedural Particle Points + Canvas Sprite | `src/three/Particles.jsx` | Original (project codebase) | Project-owned | No | Active in M1 |
 | 2D Fallback Astrolabe Portal | Inline SVG | `src/ui/HeroOverlay.jsx` | Original (project codebase) | Project-owned | No | Active in M1 |
 | Multiverse Hub Sanctuary & 5 Dimensional Portals | Procedural 3D Geometry + GLSL Vortex Shader | `src/scenes/MultiverseScene.jsx`, `src/components/Portal.jsx` | Original (project codebase) | Project-owned | No | Active in M2 |
-| Destination World Chamber Backdrop | Procedural 3D Torus & Core Geometry | `src/scenes/WorldChamberBackdrop.jsx` | Original (project codebase) | Project-owned | No | Active in M2 |
+| Destination World Chamber Backdrop (M2 stub) | Procedural 3D Torus & Core Geometry | `src/scenes/WorldChamberBackdrop.jsx` | Original (project codebase) | Project-owned | No | Retired / tree-shaken (0 bytes in `dist/`) |
 | Ancient Library Archive, 120 Instanced Books & Hinged Tome | Procedural 3D Geometry (`InstancedMesh`, stone bays, candle orbs) | `src/scenes/LibraryScene.jsx` | Original (project codebase) | Project-owned | No | Active in M3 |
 | AI Laboratory 4-Layer Neural Network Hologram | Procedural 3D Geometry (`LineSegments`, skill nodes, containment rings) | `src/scenes/AILabScene.jsx` | Original (project codebase) | Project-owned | No | Active in M3 |
 | Financial Data Universe (`StockUniverseWorld`) | Procedural 3D Geometry (`InstancedMesh` bars, `TubeGeometry`, beacons) | `src/three/models/StockUniverseWorld.jsx` | Original (project codebase) | Project-owned | No | Active in M4 |

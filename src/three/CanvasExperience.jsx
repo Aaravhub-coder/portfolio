@@ -1,4 +1,4 @@
-import { Component, Suspense, lazy, useEffect, useRef } from 'react';
+import { Component, Suspense, lazy, useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Lighting from './Lighting.jsx';
 import Particles from './Particles.jsx';
@@ -27,6 +27,16 @@ function detectWebGLSupport() {
   } catch {
     return false;
   }
+}
+
+function getPerformanceTier() {
+  if (typeof window === 'undefined') return 'standard';
+  const isCompact = window.innerWidth < 768;
+  const lowMemory =
+    typeof navigator !== 'undefined' &&
+    typeof navigator.deviceMemory === 'number' &&
+    navigator.deviceMemory <= 4;
+  return isCompact || lowMemory ? 'compact' : 'standard';
 }
 
 class WebGLErrorBoundary extends Component {
@@ -58,12 +68,20 @@ export default function CanvasExperience({ onEnterGateway, onSelectPortal }) {
   const setWebglError = useExperienceStore((s) => s.setWebglError);
   const isTabVisible = useTabVisibility();
   const cleanupRef = useRef(null);
+  const [tier, setTier] = useState(getPerformanceTier);
 
   useEffect(() => {
     if (!detectWebGLSupport()) {
       setWebglError('WebGL is unavailable on this browser/device.');
     }
   }, [setWebglError]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+    const onResize = () => setTier(getPerformanceTier());
+    window.addEventListener('resize', onResize, { passive: true });
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -73,6 +91,15 @@ export default function CanvasExperience({ onEnterGateway, onSelectPortal }) {
     };
   }, []);
 
+  // Adaptive GPU budget for Apple M1 (8 GB unified memory) and compact mobile screens
+  const quality = useMemo(
+    () =>
+      tier === 'compact'
+        ? { dpr: [1, 1.35], stars: 240, motes: 110 }
+        : { dpr: [1, 1.75], stars: 380, motes: 190 },
+    [tier]
+  );
+
   if (viewMode === '2d') {
     return null;
   }
@@ -81,11 +108,12 @@ export default function CanvasExperience({ onEnterGateway, onSelectPortal }) {
     <div className="canvas-stage" aria-hidden="true">
       <WebGLErrorBoundary onError={setWebglError}>
         <Canvas
-          dpr={[1, 1.75]}
+          dpr={quality.dpr}
+          performance={{ min: 0.5 }}
           frameloop={isTabVisible ? 'always' : 'never'}
           camera={{ position: [0, 0.08, 7.2], fov: 46, near: 0.1, far: 65 }}
           gl={{
-            antialias: true,
+            antialias: tier === 'standard',
             alpha: false,
             powerPreference: 'high-performance',
           }}
@@ -94,11 +122,22 @@ export default function CanvasExperience({ onEnterGateway, onSelectPortal }) {
               event.preventDefault();
               setWebglError('WebGL rendering context was lost.');
             };
+            const handleContextRestored = () => {
+              setWebglError(null);
+            };
             gl.domElement.addEventListener('webglcontextlost', handleContextLost);
+            gl.domElement.addEventListener(
+              'webglcontextrestored',
+              handleContextRestored
+            );
             cleanupRef.current = () => {
               gl.domElement.removeEventListener(
                 'webglcontextlost',
                 handleContextLost
+              );
+              gl.domElement.removeEventListener(
+                'webglcontextrestored',
+                handleContextRestored
               );
             };
             setCanvasReady(true);
@@ -108,7 +147,7 @@ export default function CanvasExperience({ onEnterGateway, onSelectPortal }) {
           <fog attach="fog" args={['#100d16', 11, 30]} />
           <Lighting />
           <CameraController />
-          <Particles starCount={420} moteCount={220} />
+          <Particles starCount={quality.stars} moteCount={quality.motes} />
 
           <Suspense fallback={null}>
             {activeScene === SCENES.GATEWAY && (

@@ -5,26 +5,32 @@ export default defineConfig({
   plugins: [react()],
   build: {
     target: 'es2020',
-    rollupOptions: {
+    chunkSizeWarningLimit: 700,
+    rolldownOptions: {
       output: {
-        manualChunks(id) {
-          if (id.includes('node_modules/three')) {
-            return 'three-core';
-          }
-          if (
-            id.includes('node_modules/@react-three/fiber') ||
-            id.includes('node_modules/@react-three/drei')
-          ) {
-            return 'r3f-ecosystem';
-          }
-          if (
-            id.includes('node_modules/gsap') ||
-            id.includes('node_modules/zustand') ||
-            id.includes('node_modules/lucide-react')
-          ) {
-            return 'animation-ui';
-          }
-          return undefined;
+        codeSplitting: {
+          groups: [
+            {
+              name: 'three-core',
+              test: /node_modules\/three\//,
+              priority: 30,
+            },
+            {
+              name: 'r3f-ecosystem',
+              test: /node_modules\/@react-three\//,
+              priority: 25,
+            },
+            {
+              name: 'react-vendor',
+              test: /node_modules\/(react|react-dom|scheduler)\//,
+              priority: 20,
+            },
+            {
+              name: 'animation-ui',
+              test: /node_modules\/(gsap|zustand|lucide-react)\//,
+              priority: 15,
+            },
+          ],
         },
       },
     },

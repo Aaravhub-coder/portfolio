@@ -56,14 +56,16 @@ Typography: `Cinzel` (display), `Manrope` (UI/body), `DM Mono` (labels/metadata)
   6. **SkillHub** — Builder’s Workshop (`BuilderWorkshopWorld.jsx`: blueprint grid table, modular illuminated blocks, and interlocking workshop gears)
 - Built `src/ui/ProjectPanel.jsx` with a 6-world selector bar, Prev/Next navigation, verified problem statements, CV-accurate highlights, technology tags, verified hackathon awards, verified Chandrayaan-2 GitHub repo link, and zero fabricated metrics/screenshots.
 
-### M5 — Achievement Hall & Contact Portal *(Completed — Pending Owner Review)*
+### M5 — Achievement Hall & Contact Portal *(Completed & Pushed — `7adb218`)*
 - **Achievement Hall (`src/scenes/AchievementScene.jsx` + `src/ui/AchievementPanel.jsx`):** Built a ceremonial 3D honors gallery with six illuminated antique-gold/plum/cyan trophy & certificate pedestals synced two-way with filterable cards (`All`, `Hackathons`, `Certification`, `Learning`) strictly reflecting Aarav’s verified CV achievements (no invented dates or IDs).
 - **Contact Portal (`src/scenes/ContactScene.jsx` + `src/ui/ContactPanel.jsx`):** Built a 3D dimensional communication beacon with expanding cyan signal rings and three orbiting channel relay nodes synced with working `mailto:aaravrajgo@gmail.com` (+ Copy Email button), GitHub, LinkedIn, Return-to-Hub, and Return-to-Gateway actions.
 
-### M6 — Optimization, QA & Deployment Prep
-- Measure draw calls, particle budgets, frame rate, and memory on Apple M1 / 8 GB.
-- Verify desktop/tablet/mobile responsiveness, keyboard accessibility, `prefers-reduced-motion`, and 2D fallback mode.
-- Final production build audit and deployment proposal (no publishing without explicit owner approval).
+### M6 — Optimization & QA Testing *(Completed — Pending Owner Review; Deployment Explicitly Excluded per Owner)*
+- **Bundle & Lazy-Loading Optimization:** Switched `@react-three/drei` barrel imports to direct `@react-three/drei/web/Html` imports (removing 539 unused `three-stdlib` modules), configured Vite 8 native `rolldownOptions.output.codeSplitting` (`three-core`, `r3f-ecosystem`, `animation-ui`), and lazy-loaded all non-Gateway UI panels in `src/App.jsx` — shrinking Gateway entry JS by **63%** (`54.72 kB` → `20.43 kB`, `7.09 kB` gzip) and cutting build time to `332ms`.
+- **Adaptive 3D Performance & Recovery:** Added viewport/device-memory adaptive DPR (`[1, 1.35]` compact vs `[1, 1.75]` desktop) and particle scaling (`350` compact vs `570` desktop), R3F `performance={{ min: 0.5 }}`, and `webglcontextrestored` recovery in `src/three/CanvasExperience.jsx`.
+- **Accessibility & Keyboard Hardening:** Added skip-to-content link, live `aria-live` route title announcements, automatic scroll-to-top on scene transitions, `ArrowLeft`/`ArrowRight` stepping across the 6 Project Worlds, and `rel="noopener noreferrer"` on every external link.
+- **Automated QA Suite (`scripts/qa-check.mjs`, `npm run qa`):** Verified **11/11 checks passing** across CV content integrity, single-`<Canvas>` architecture, explicit GPU `.dispose()` hygiene, Apple M1 Metal/ANGLE GLSL `pow()` safety, muted-by-default audio, tab-visibility pause, external link security, full 12-state navigation + WebGL 2D fallback flow, and Three.js geometry sanity (0 NaNs).
+- **No Deployment Setup:** Per owner instructions, no deployment configurations (Vercel, Netlify, GitHub Pages, etc.) were created or published.
 
 ---
 
