@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  // Serves cleanly at root during local dev, and at /portfolio/ on GitHub Pages
+  base: command === 'build' ? '/portfolio/' : '/',
   plugins: [react()],
   build: {
     target: 'es2020',
@@ -35,4 +37,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));

@@ -5,6 +5,8 @@
 
 Interactive 3D portfolio for **Aarav Raj** (Aspiring AI Engineer) blending an original ancient magical archive, dimensional multiverse portals, modern AI laboratory aesthetics, and an inventor’s workshop.
 
+**Live GitHub Pages URL:** https://aaravhub-coder.github.io/portfolio/
+
 ## Implemented Worlds
 
 1. **Gateway:** Full-screen cosmic astrolabe portal with custom GLSL vortex shader, beveled 3D `AR` monogram, pointer parallax, GSAP portal dive, loading screen, muted-by-default procedural Web Audio toggle, and 2D SVG fallback.

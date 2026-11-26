@@ -1,3 +1,6 @@
+const BASE_URL =
+  (typeof import.meta !== 'undefined' && import.meta.env?.BASE_URL) || '/';
+
 export const PROFILE = {
   name: 'Aarav Raj',
   initials: 'AR',
@@ -12,7 +15,7 @@ export const PROFILE = {
     email: 'aaravrajgo@gmail.com',
     phone: '+91-9523512702',
     phoneHref: 'tel:+919523512702',
-    cvUrl: '/Aarav_Raj_CV.pdf',
+    cvUrl: `${BASE_URL}Aarav_Raj_CV.pdf`,
     cvFileName: 'Aarav_Raj_CV.pdf',
     github: 'https://github.com/Aaravhub-coder',
     githubLabel: 'github.com/Aaravhub-coder',
