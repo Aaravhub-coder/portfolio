@@ -45,11 +45,16 @@ function walkFiles(dir, extFilter = null) {
 }
 
 // 1. CV & Verified Content Integrity
-check('Content integrity: CV profile & contact', () => {
+check('Content integrity: CV profile, phone, CV PDF & 3 book chapters', () => {
   assert(PROFILE.name === 'Aarav Raj', 'Owner name mismatch');
   assert(
     PROFILE.contact.email === 'aaravrajgo@gmail.com',
     'Email mismatch'
+  );
+  assert(
+    PROFILE.contact.phone === '+91-9523512702' &&
+      PROFILE.contact.phoneHref === 'tel:+919523512702',
+    'Verified phone number mismatch'
   );
   assert(
     PROFILE.contact.github === 'https://github.com/Aaravhub-coder',
@@ -60,6 +65,11 @@ check('Content integrity: CV profile & contact', () => {
       'https://www.linkedin.com/in/aarav-raj-a2a49135b',
     'LinkedIn URL mismatch'
   );
+  assert(
+    Array.isArray(PROFILE.libraryChapters) &&
+      PROFILE.libraryChapters.length === 3,
+    'Expected 3 Ancient Library chapters (Profile, Personal Story, Education)'
+  );
   assert(PROFILE.education.length === 3, 'Expected 3 verified education entries');
   assert(
     PROFILE.education[0].qualification ===
@@ -67,7 +77,15 @@ check('Content integrity: CV profile & contact', () => {
     'Primary B.Tech wording must match latest CV'
   );
   assert(HUB_PORTALS.length === 5, 'Expected exactly 5 Multiverse Hub portals');
-  return 'profile, 3 education rows, 5 portals verified';
+
+  const cvPath = path.join(ROOT, 'public', 'Aarav_Raj_CV.pdf');
+  assert(fs.existsSync(cvPath), 'Missing downloadable CV at public/Aarav_Raj_CV.pdf');
+  const pdfRaw = fs.readFileSync(cvPath, 'latin1');
+  assert(pdfRaw.startsWith('%PDF-1.4'), 'CV file must be a valid PDF 1.4 header');
+  assert(pdfRaw.trimEnd().endsWith('%%EOF'), 'CV PDF must end with %%EOF');
+  assert(pdfRaw.includes('9523512702'), 'CV PDF must include verified phone number');
+
+  return 'profile, phone, valid CV PDF, 3 chapters, 3 education rows, 5 portals verified';
 });
 
 check('Content integrity: honest skills without fake percentages', () => {
@@ -137,7 +155,7 @@ check('3D architecture: strictly one shared <Canvas> context', () => {
   return `single <Canvas> in ${canvasMatches[0].file}`;
 });
 
-check('GPU hygiene: every Three.js geometry/material allocator calls dispose()', () => {
+check('GPU hygiene: every Three.js geometry/material/texture allocator calls dispose()', () => {
   const jsxFiles = walkFiles(SRC, ['.jsx', '.js']);
   const missingDispose = [];
   for (const file of jsxFiles) {
@@ -222,8 +240,8 @@ check('Link security & a11y: rel="noopener noreferrer" on all target="_blank"', 
   return 'all external links hardened with rel="noopener noreferrer"';
 });
 
-// 4. End-to-End Store Journey & 2D Fallback State Verification
-check('End-to-end navigation journey & automatic 2D fallback', () => {
+// 4. End-to-End Store Journey, Giant Book 3-Chapter Turning & 2D Fallback Verification
+check('End-to-end navigation, 3-chapter giant book turning & 2D fallback', () => {
   const store = useExperienceStore;
   store.getState().returnToGateway();
   assert(store.getState().activeScene === SCENES.GATEWAY, 'Start at Gateway');
@@ -232,8 +250,38 @@ check('End-to-end navigation journey & automatic 2D fallback', () => {
   assert(store.getState().activeScene === SCENES.HUB, 'Enter Hub');
 
   store.getState().navigateTo(SCENES.LIBRARY);
-  store.getState().toggleLibraryChapter();
-  assert(store.getState().activeLibraryChapter === 'education', 'Library toggle');
+  assert(
+    store.getState().libraryBookOpen === false &&
+      store.getState().libraryChapterIndex === 0,
+    'Library arrives with closed ancient book at Chapter I'
+  );
+  store.getState().openLibraryBook();
+  assert(store.getState().libraryBookOpen === true, 'Open giant ancient book');
+
+  store.getState().stepLibraryChapter(1);
+  assert(
+    store.getState().libraryChapterIndex === 1 &&
+      store.getState().activeLibraryChapter === 'story' &&
+      store.getState().libraryTurningDir === 1,
+    'Turn forward to Chapter II (Personal Story)'
+  );
+  store.getState().clearLibraryTurning();
+
+  store.getState().stepLibraryChapter(1);
+  assert(
+    store.getState().libraryChapterIndex === 2 &&
+      store.getState().activeLibraryChapter === 'education' &&
+      store.getState().libraryTurningDir === 1,
+    'Turn forward to Chapter III (Education)'
+  );
+  store.getState().stepLibraryChapter(-1);
+  assert(
+    store.getState().libraryChapterIndex === 1 &&
+      store.getState().libraryTurningDir === -1,
+    'Turn backward to Chapter II'
+  );
+  store.getState().closeLibraryBook();
+  assert(store.getState().libraryBookOpen === false, 'Close ancient book');
 
   store.getState().navigateTo(SCENES.AILAB);
   store.getState().setSelectedSkillCategory('languages');
@@ -258,8 +306,10 @@ check('End-to-end navigation journey & automatic 2D fallback', () => {
   );
 
   store.getState().navigateTo(SCENES.CONTACT);
-  store.getState().setHoveredContactChannel('github');
-  assert(store.getState().hoveredContactChannel === 'github', 'Contact relay sync');
+  store.getState().setHoveredContactChannel('cv');
+  assert(store.getState().hoveredContactChannel === 'cv', 'Contact CV relay sync');
+  store.getState().setHoveredContactChannel('phone');
+  assert(store.getState().hoveredContactChannel === 'phone', 'Contact Phone relay sync');
 
   store.getState().returnToHub();
   assert(
@@ -277,12 +327,11 @@ check('End-to-end navigation journey & automatic 2D fallback', () => {
   store.getState().setWebglError(null);
   assert(store.getState().viewMode === '3d', 'WebGL recovery restores 3D mode');
 
-  return 'full 12-state journey + WebGL 2D fallback verified';
+  return 'full 12-state journey, 3-chapter page turns, CV/phone relays & 2D fallback verified';
 });
 
 // 5. Three.js Procedural Geometry Integrity
-check('Three.js procedural geometry validation (0 NaNs, finite bounds)', () => {
-  // Validate cratered lunar heightfield math
+check('Three.js procedural geometry validation (lunar terrain & curved book page)', () => {
   const geo = new THREE.PlaneGeometry(5.6, 5.6, 44, 44);
   geo.rotateX(-Math.PI / 2);
   const pos = geo.attributes.position;
@@ -296,11 +345,31 @@ check('Three.js procedural geometry validation (0 NaNs, finite bounds)', () => {
   geo.computeVertexNormals();
   geo.computeBoundingBox();
   for (let i = 0; i < pos.array.length; i += 1) {
-    assert(Number.isFinite(pos.array[i]), 'NaN/Infinite vertex detected');
+    assert(Number.isFinite(pos.array[i]), 'NaN/Infinite lunar vertex detected');
   }
-  const vertexCount = pos.count;
+  const lunarVerts = pos.count;
   geo.dispose();
-  return `${vertexCount} lunar terrain vertices verified finite with 0 NaNs`;
+
+  // Validate curved 3D turning book page deformation at midpoint (t = 0.5)
+  const pageGeo = new THREE.PlaneGeometry(0.92, 1.24, 22, 4);
+  pageGeo.translate(0.46, 0, 0);
+  const pAttr = pageGeo.attributes.position;
+  for (let i = 0; i < pAttr.count; i += 1) {
+    const bx = pAttr.getX(i);
+    const by = pAttr.getY(i);
+    const u = bx / 0.92;
+    const angle = Math.PI / 2 - 0.28 * 0.65 * u * u;
+    const lift = Math.sin(u * Math.PI) * 0.28 * 0.34;
+    pAttr.setXYZ(i, Math.cos(angle) * bx, by, Math.sin(angle) * bx + lift);
+  }
+  pageGeo.computeVertexNormals();
+  for (let i = 0; i < pAttr.array.length; i += 1) {
+    assert(Number.isFinite(pAttr.array[i]), 'NaN/Infinite turning page vertex detected');
+  }
+  const pageVerts = pAttr.count;
+  pageGeo.dispose();
+
+  return `${lunarVerts} lunar verts + ${pageVerts} curved book-page verts verified (0 NaNs)`;
 });
 
 // Print QA Report

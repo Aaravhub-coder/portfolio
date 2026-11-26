@@ -9,7 +9,7 @@ Interactive 3D portfolio for **Aarav Raj** (Aspiring AI Engineer) blending an or
 
 1. **Gateway:** Full-screen cosmic astrolabe portal with custom GLSL vortex shader, beveled 3D `AR` monogram, pointer parallax, GSAP portal dive, loading screen, muted-by-default procedural Web Audio toggle, and 2D SVG fallback.
 2. **Multiverse Hub:** Central observatory dais with five interactive 3D portals, desktop badges, synced keyboard/touch Portal Dock (`Tab`, `← / →`, `Enter`), and persistent top navigation (`Escape` returns to Hub).
-3. **Ancient Library:** Curved candlelit stone bays, 120 instanced books (1 draw call), flickering lanterns, interactive hinged Chronicle Tome, and verified About & Education panel.
+3. **Ancient Library:** Curved candlelit stone bays, 120 instanced books (1 draw call), flickering lanterns, rotating golden arcane runes, 180 rising golden archive dust motes, and a **giant floating ancient book** with realistic animated curved page-turning revealing **Profile**, **Personal Story**, and **Education** across three chapters with cinematic camera transitions.
 4. **AI Laboratory:** Holographic 4-layer 3D neural network (`18` skill nodes + `1` `LineSegments` web) synced two-way with honest category filters.
 5. **Project Worlds (6 Lazy-Loaded Realms):**
    - *AI Fake Stock Detector* — Financial Data Universe
@@ -19,7 +19,7 @@ Interactive 3D portfolio for **Aarav Raj** (Aspiring AI Engineer) blending an or
    - *Chandrayaan-2 Image Correspondence* — Lunar Research Station *(Research Direction / Proposed Pipeline)*
    - *SkillHub* — Builder’s Workshop
 6. **Achievement Hall:** Six illuminated interactive trophy/certificate pedestals synced with verified CV achievements and category filters.
-7. **Contact Portal:** Dimensional beacon sanctuary with working `mailto:aaravrajgo@gmail.com` (+ Copy Email button), GitHub, LinkedIn, and Return-to-Hub / Gateway navigation.
+7. **Contact Portal:** Dimensional beacon sanctuary with 5 orbiting channel relays, working `mailto:aaravrajgo@gmail.com`, phone `+91-9523512702` (+ Copy buttons), downloadable verified CV PDF (`public/Aarav_Raj_CV.pdf`), GitHub, LinkedIn, and Return-to-Hub / Gateway navigation.
 
 ## Tech Stack
 
@@ -55,5 +55,7 @@ npm run preview  # Preview local production build
 ## Contact
 
 - **Email:** aaravrajgo@gmail.com
+- **Phone:** +91-9523512702
+- **CV:** [`public/Aarav_Raj_CV.pdf`](./public/Aarav_Raj_CV.pdf)
 - **GitHub:** https://github.com/Aaravhub-coder
 - **LinkedIn:** https://www.linkedin.com/in/aarav-raj-a2a49135b

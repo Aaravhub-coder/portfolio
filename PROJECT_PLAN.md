@@ -67,6 +67,10 @@ Typography: `Cinzel` (display), `Manrope` (UI/body), `DM Mono` (labels/metadata)
 - **Automated QA Suite (`scripts/qa-check.mjs`, `npm run qa`):** Verified **11/11 checks passing** across CV content integrity, single-`<Canvas>` architecture, explicit GPU `.dispose()` hygiene, Apple M1 Metal/ANGLE GLSL `pow()` safety, muted-by-default audio, tab-visibility pause, external link security, full 12-state navigation + WebGL 2D fallback flow, and Three.js geometry sanity (0 NaNs).
 - **No Deployment Setup:** Per owner instructions, no deployment configurations (Vercel, Netlify, GitHub Pages, etc.) were created or published.
 
+### Post-M6 Enhancement — Giant Ancient Book Archive, Phone & Downloadable CV *(Completed — Pending Owner Review)*
+- **Ancient Library Transformation (`src/scenes/LibraryScene.jsx`, `src/three/CameraController.jsx`, `src/ui/AboutPanel.jsx`):** Upgraded the archive centerpiece into a giant levitating ancient book with embossed `"AR"` mystic-plum leather cover, brass clasps, smooth open/close hinges, curved sinusoidal 3D page-turning leaf, procedural illuminated manuscript spreads across **3 chapters** (*Chapter I · Profile*, *Chapter II · Personal Story*, *Chapter III · Education*), rotating golden arcane rune circle, 180 rising golden dust motes, and cinematic GSAP closed→open→chapter camera framing.
+- **Contact Portal Expansion (`src/ui/ContactPanel.jsx`, `src/scenes/ContactScene.jsx`, `public/Aarav_Raj_CV.pdf`):** Added owner-approved phone contact (`+91-9523512702` with `tel:` link + Copy button), a clean single-page downloadable CV PDF (`public/Aarav_Raj_CV.pdf` with Download + View actions), and 5 synchronized 3D beacon relay nodes (`CV`, `Phone`, `Email`, `GitHub`, `LinkedIn`).
+
 ---
 
 ## Performance Targets (Hypotheses to Measure)

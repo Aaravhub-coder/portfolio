@@ -5,10 +5,13 @@ import {
   Code2,
   Compass,
   Copy,
+  Download,
   ExternalLink,
   Eye,
   EyeOff,
+  FileText,
   Mail,
+  Phone,
   Send,
 } from 'lucide-react';
 import { PROFILE } from '../data/profile.js';
@@ -26,7 +29,7 @@ export default function ContactPanel({ onReturnHub, onReturnGateway }) {
   const viewMode = useExperienceStore((s) => s.viewMode);
   const isTransitioning = useExperienceStore((s) => s.isTransitioning);
 
-  const [copied, setCopied] = useState(false);
+  const [copiedField, setCopiedField] = useState(null);
   const copyTimerRef = useRef(null);
 
   useEffect(() => {
@@ -37,16 +40,16 @@ export default function ContactPanel({ onReturnHub, onReturnGateway }) {
     };
   }, []);
 
-  const handleCopyEmail = async () => {
+  const handleCopy = async (field, value) => {
     try {
       if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(PROFILE.contact.email);
+        await navigator.clipboard.writeText(value);
       }
-      setCopied(true);
+      setCopiedField(field);
       if (copyTimerRef.current) window.clearTimeout(copyTimerRef.current);
-      copyTimerRef.current = window.setTimeout(() => setCopied(false), 2200);
+      copyTimerRef.current = window.setTimeout(() => setCopiedField(null), 2200);
     } catch {
-      setCopied(false);
+      setCopiedField(null);
     }
   };
 
@@ -72,7 +75,8 @@ export default function ContactPanel({ onReturnHub, onReturnGateway }) {
       <div className="world-3d-window" aria-hidden="true">
         {viewMode === '3d' && (
           <p className="world-canvas-tip">
-            Hover any contact channel to illuminate its dimensional relay beacon
+            Hover any contact channel or CV download card to illuminate its
+            dimensional relay beacon
           </p>
         )}
       </div>
@@ -106,12 +110,108 @@ export default function ContactPanel({ onReturnHub, onReturnGateway }) {
 
         <p className="world-panel__lead">
           Reach <strong>{PROFILE.name}</strong> ({PROFILE.role}) directly for
-          internships, AI/ML collaborations, hackathons, or technical
-          conversations.
+          internships, AI/ML collaborations, hackathons, or download the
+          verified CV.
         </p>
 
         <div className="world-panel__body">
           <div className="contact-channels">
+            {/* Downloadable CV Document Card */}
+            <div
+              className={`contact-card contact-card--cv ${hoveredContactChannel === 'cv' ? 'contact-card--active' : ''}`}
+              onMouseEnter={() => setHoveredContactChannel('cv')}
+              onMouseLeave={() => setHoveredContactChannel(null)}
+            >
+              <div className="contact-card__main">
+                <span
+                  className="contact-card__icon contact-card__icon--gold"
+                  aria-hidden="true"
+                >
+                  <FileText size={18} />
+                </span>
+                <span className="contact-card__text">
+                  <span className="contact-card__label">Curriculum Vitae</span>
+                  <strong className="contact-card__value">
+                    {PROFILE.cvFileName || PROFILE.contact.cvFileName}
+                  </strong>
+                  <span className="contact-card__hint">
+                    Verified 1-page PDF resume
+                  </span>
+                </span>
+              </div>
+
+              <div className="contact-cv-actions">
+                <a
+                  href={PROFILE.contact.cvUrl}
+                  download={PROFILE.contact.cvFileName}
+                  className="contact-download-btn"
+                  onFocus={() => setHoveredContactChannel('cv')}
+                  onBlur={() => setHoveredContactChannel(null)}
+                >
+                  <Download size={14} aria-hidden="true" />
+                  <span>Download CV</span>
+                </a>
+                <a
+                  href={PROFILE.contact.cvUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact-copy-btn"
+                  aria-label="Open CV PDF in a new tab"
+                  onFocus={() => setHoveredContactChannel('cv')}
+                  onBlur={() => setHoveredContactChannel(null)}
+                >
+                  <ExternalLink size={13} aria-hidden="true" />
+                  <span>View</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Phone Direct Card */}
+            <div
+              className={`contact-card ${hoveredContactChannel === 'phone' ? 'contact-card--active' : ''}`}
+              onMouseEnter={() => setHoveredContactChannel('phone')}
+              onMouseLeave={() => setHoveredContactChannel(null)}
+            >
+              <a
+                href={PROFILE.contact.phoneHref}
+                className="contact-card__main"
+                onFocus={() => setHoveredContactChannel('phone')}
+                onBlur={() => setHoveredContactChannel(null)}
+              >
+                <span className="contact-card__icon" aria-hidden="true">
+                  <Phone size={18} />
+                </span>
+                <span className="contact-card__text">
+                  <span className="contact-card__label">Phone</span>
+                  <strong className="contact-card__value">
+                    {PROFILE.contact.phone}
+                  </strong>
+                  <span className="contact-card__hint">
+                    Direct call or mobile contact
+                  </span>
+                </span>
+              </a>
+
+              <button
+                type="button"
+                className={`contact-copy-btn ${copiedField === 'phone' ? 'contact-copy-btn--copied' : ''}`}
+                onClick={() => handleCopy('phone', PROFILE.contact.phone)}
+                aria-label="Copy phone number"
+              >
+                {copiedField === 'phone' ? (
+                  <>
+                    <Check size={14} aria-hidden="true" />
+                    <span>Copied</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy size={14} aria-hidden="true" />
+                    <span>Copy</span>
+                  </>
+                )}
+              </button>
+            </div>
+
             {/* Email Direct Card */}
             <div
               className={`contact-card ${hoveredContactChannel === 'email' ? 'contact-card--active' : ''}`}
@@ -140,11 +240,11 @@ export default function ContactPanel({ onReturnHub, onReturnGateway }) {
 
               <button
                 type="button"
-                className={`contact-copy-btn ${copied ? 'contact-copy-btn--copied' : ''}`}
-                onClick={handleCopyEmail}
+                className={`contact-copy-btn ${copiedField === 'email' ? 'contact-copy-btn--copied' : ''}`}
+                onClick={() => handleCopy('email', PROFILE.contact.email)}
                 aria-label="Copy email address"
               >
-                {copied ? (
+                {copiedField === 'email' ? (
                   <>
                     <Check size={14} aria-hidden="true" />
                     <span>Copied</span>

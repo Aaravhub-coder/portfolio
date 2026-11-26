@@ -5,9 +5,11 @@ import * as THREE from 'three';
 import { useExperienceStore } from '../store/experienceStore.js';
 
 const RELAYS = [
-  { id: 'email', label: 'Email · Direct', angle: -Math.PI / 2, y: 0.45 },
-  { id: 'github', label: 'GitHub · Code', angle: Math.PI / 6, y: -0.22 },
-  { id: 'linkedin', label: 'LinkedIn · Network', angle: (5 * Math.PI) / 6, y: -0.22 },
+  { id: 'cv', label: 'CV · Download PDF', angle: -Math.PI / 2, y: 0.72 },
+  { id: 'phone', label: 'Phone · +91-9523512702', angle: -Math.PI / 10, y: 0.25 },
+  { id: 'email', label: 'Email · Direct', angle: (3 * Math.PI) / 10, y: -0.45 },
+  { id: 'github', label: 'GitHub · Code', angle: (7 * Math.PI) / 10, y: -0.45 },
+  { id: 'linkedin', label: 'LinkedIn · Network', angle: (11 * Math.PI) / 10, y: 0.25 },
 ];
 
 export default function ContactScene() {
@@ -35,8 +37,8 @@ export default function ContactScene() {
       innerAstrolabe: new THREE.TorusGeometry(0.92, 0.015, 10, 64),
       beaconCore: new THREE.OctahedronGeometry(0.32, 0),
       pulseWave: new THREE.TorusGeometry(1.15, 0.012, 8, 64),
-      relayOrb: new THREE.OctahedronGeometry(0.16, 1),
-      relayRing: new THREE.TorusGeometry(0.25, 0.014, 8, 28),
+      relayOrb: new THREE.OctahedronGeometry(0.15, 1),
+      relayRing: new THREE.TorusGeometry(0.24, 0.014, 8, 28),
     }),
     []
   );
@@ -86,10 +88,10 @@ export default function ContactScene() {
   );
 
   const relayPositions = useMemo(() => {
-    const r = 1.98;
+    const r = 2.02;
     return RELAYS.map((relay) => ({
       ...relay,
-      pos: [Math.cos(relay.angle) * r, 1.38 + relay.y, Math.sin(relay.angle) * 0.65],
+      pos: [Math.cos(relay.angle) * r, 1.38 + relay.y, Math.sin(relay.angle) * 0.62],
     }));
   }, []);
 
@@ -134,7 +136,7 @@ export default function ContactScene() {
 
     waveRefs.current.forEach((wave, idx) => {
       if (!wave) return;
-      const cycle = ((t * 0.38 + idx / 3) % 1);
+      const cycle = (t * 0.38 + idx / 3) % 1;
       const scale = 0.72 + cycle * 1.45;
       wave.scale.setScalar(scale);
     });
@@ -188,7 +190,7 @@ export default function ContactScene() {
         ))}
       </group>
 
-      {/* Three Interactive Channel Relay Nodes (Email, GitHub, LinkedIn) */}
+      {/* Five Interactive Channel Relay Nodes (CV, Phone, Email, GitHub, LinkedIn) */}
       {relayPositions.map((relay, idx) => {
         const active = hoveredContactChannel === relay.id;
         return (
@@ -214,7 +216,13 @@ export default function ContactScene() {
           >
             <mesh
               geometry={geometries.relayOrb}
-              material={active ? materials.goldBright : materials.cyan}
+              material={
+                active
+                  ? materials.goldBright
+                  : relay.id === 'cv'
+                    ? materials.gold
+                    : materials.cyan
+              }
             />
             <mesh
               geometry={geometries.relayRing}

@@ -1,0 +1,141 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R /F2 5 0 R /F3 6 0 R >> >> /Contents 7 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding >>
+endobj
+7 0 obj
+<< /Length 5253 >>
+stream
+0.05 g
+BT /F2 19 Tf 259.8 752.0 Td (AARAV RAJ) Tj ET
+0.20 g
+BT /F1 8.7 Tf 86.5 734.0 Td (Aaravrajgo@gmail.com | +91-9523512702 | github.com/Aaravhub-coder | linkedin.com/in/aarav-raj-a2a49135b) Tj ET
+0.25 g
+BT /F3 8.7 Tf 50.0 719.0 Td ("Passionate about building intelligent systems and solving real-world problems through AI, analytics, and practical technology solutions.") Tj ET
+0.75 G 0.8 w 50 710.0 m 562 710.0 l S
+0.05 g
+BT /F2 10.6 Tf 50.0 693.0 Td (SKILLS) Tj ET
+0.12 g
+BT /F1 9.2 Tf 50.0 679.5 Td (Languages: Python, SQL) Tj ET
+0.12 g
+BT /F1 9.2 Tf 50.0 667.0 Td (Frameworks & Tools: Git/GitHub, VS Code, Jupyter Notebook, Pandas, NumPy, Scikit-learn) Tj ET
+0.12 g
+BT /F1 9.2 Tf 50.0 654.5 Td (Data Science & AI: EDA, Data Analysis, Machine Learning Concepts, TensorFlow \(Learning\)) Tj ET
+0.86 G 0.5 w 50 641.0 m 562 641.0 l S
+0.05 g
+BT /F2 10.6 Tf 50.0 627.0 Td (PROJECT WORK) Tj ET
+0.06 g
+BT /F2 9.5 Tf 50.0 613.5 Td (AI Fake Stock Detector | Financial Anomaly Detection) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 601.5 Td (\225 Processed stock-market data and engineered features to examine price movements and trading-volume) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 590.4 Td (   behaviour.) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 579.3 Td (\225 Calculated Z-scores and implemented Isolation Forest to flag potentially unusual price or volume) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 568.2 Td (   patterns.) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 557.1 Td (\225 Combined statistical and ML-based anomaly detection to identify potentially suspicious market) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 546.0 Td (   activity.) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 534.9 Td (\225 Presented detection outputs to support financial-risk awareness for retail investors.) Tj ET
+0.06 g
+BT /F2 9.5 Tf 50.0 519.8 Td (Business Entity Resolution | Multi-Source Business Matching) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 507.8 Td (\225 Loaded large business datasets and organized training, validation, and ground-truth workflows.) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 496.7 Td (\225 Normalized business names, addresses, and country fields to reduce inconsistencies across records.) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 485.6 Td (\225 Retrieved candidate matches using character-level TF-IDF and cosine-similarity nearest-neighbour) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 474.5 Td (   search.) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 463.4 Td (\225 Built a matching pipeline using engineered features and XGBoost to predict matches and generate) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 452.3 Td (   structured outputs.) Tj ET
+0.06 g
+BT /F2 9.5 Tf 50.0 437.2 Td (SolarQuest | Intelligent Solar Recommendation App) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 425.2 Td (\225 Developed an Android application using roof area and geographical location as user inputs.) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 414.1 Td (\225 Processed user inputs through the solar recommendation workflow.) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 403.0 Td (\225 Integrated an intelligent recommendation model with the application for solar suitability) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 391.9 Td (   assessment.) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 380.8 Td (\225 Presented solar-related recommendations to help users explore rooftop solar solutions.) Tj ET
+0.06 g
+BT /F2 9.5 Tf 50.0 365.7 Td (SANGYAN Shield | Cybersecurity Detection App) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 353.7 Td (\225 Developed a cross-platform mobile workflow for submitting inputs to a cybersecurity detection) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 342.6 Td (   engine.) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 331.5 Td (\225 Integrated the mobile interface with a Python FastAPI backend for communication with the analysis) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 320.4 Td (   pipeline.) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 309.3 Td (\225 Connected screenshot-upload and analysis workflows for backend request handling and model-driven) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 298.2 Td (   processing.) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 287.1 Td (\225 Tested image uploads, backend requests, and returned analysis responses while troubleshooting) Tj ET
+0.14 g
+BT /F1 8.8 Tf 58.0 276.0 Td (   integration issues.) Tj ET
+0.86 G 0.5 w 50 264.9 m 562 264.9 l S
+0.05 g
+BT /F2 10.6 Tf 50.0 250.9 Td (EDUCATION) Tj ET
+0.12 g
+BT /F1 9.2 Tf 50.0 237.4 Td (The ICFAI University, Dehradun \226 B.Tech \(Data Science & Artificial Intelligence\) \(2024\2262028\)) Tj ET
+0.12 g
+BT /F1 9.2 Tf 50.0 224.9 Td (Manas Bharti Educational Complex \226 Class XII \(2023\)) Tj ET
+0.12 g
+BT /F1 9.2 Tf 50.0 212.4 Td (Manas Bharti Educational Complex \226 Class X \(2021\)) Tj ET
+0.86 G 0.5 w 50 198.9 m 562 198.9 l S
+0.05 g
+BT /F2 10.6 Tf 50.0 184.9 Td (ACHIEVEMENTS & CERTIFICATIONS) Tj ET
+0.14 g
+BT /F1 9 Tf 58.0 171.4 Td (\225 Runner-Up \226 ByteVerse 1.0 Hackathon, ICFAI University) Tj ET
+0.14 g
+BT /F1 9 Tf 58.0 159.2 Td (\225 Runner-Up \226 GNA University Hackathon 4.0, Clean and Green Technologies, SolarQuest) Tj ET
+0.14 g
+BT /F1 9 Tf 58.0 147.0 Td (\225 Top 100 \227 SANGYAN Hackathon, IIT \(BHU\)) Tj ET
+0.14 g
+BT /F1 9 Tf 58.0 134.8 Td (\225 Participant \227 AWS Machine Learning Hackathon) Tj ET
+0.14 g
+BT /F1 9 Tf 58.0 122.6 Td (\225 Python Certification \226 PW Skills) Tj ET
+0.14 g
+BT /F1 9 Tf 58.0 110.4 Td (\225 Active learner in Data Science & Artificial Intelligence) Tj ET
+endstream
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000261 00000 n 
+0000000358 00000 n 
+0000000460 00000 n 
+0000000565 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+5870
+%%EOF

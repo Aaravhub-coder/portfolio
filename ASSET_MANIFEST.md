@@ -29,7 +29,7 @@ Every external or generated media asset (3D models, textures, fonts, audio, icon
 | 2D Fallback Astrolabe Portal | Inline SVG | `src/ui/HeroOverlay.jsx` | Original (project codebase) | Project-owned | No | Active in M1 |
 | Multiverse Hub Sanctuary & 5 Dimensional Portals | Procedural 3D Geometry + GLSL Vortex Shader | `src/scenes/MultiverseScene.jsx`, `src/components/Portal.jsx` | Original (project codebase) | Project-owned | No | Active in M2 |
 | Destination World Chamber Backdrop (M2 stub) | Procedural 3D Torus & Core Geometry | `src/scenes/WorldChamberBackdrop.jsx` | Original (project codebase) | Project-owned | No | Retired / tree-shaken (0 bytes in `dist/`) |
-| Ancient Library Archive, 120 Instanced Books & Hinged Tome | Procedural 3D Geometry (`InstancedMesh`, stone bays, candle orbs) | `src/scenes/LibraryScene.jsx` | Original (project codebase) | Project-owned | No | Active in M3 |
+| Ancient Library Archive, 120 Instanced Books, Giant Floating Ancient Book, Curved Turning Page, Golden Rune Circle & Archive Dust | Procedural 3D Geometry (`InstancedMesh`, animated bending `PlaneGeometry`, `Points`) + Procedural `CanvasTexture`s | `src/scenes/LibraryScene.jsx` | Original (project codebase) | Project-owned | No | Active (Upgraded Post-M6) |
 | AI Laboratory 4-Layer Neural Network Hologram | Procedural 3D Geometry (`LineSegments`, skill nodes, containment rings) | `src/scenes/AILabScene.jsx` | Original (project codebase) | Project-owned | No | Active in M3 |
 | Financial Data Universe (`StockUniverseWorld`) | Procedural 3D Geometry (`InstancedMesh` bars, `TubeGeometry`, beacons) | `src/three/models/StockUniverseWorld.jsx` | Original (project codebase) | Project-owned | No | Active in M4 |
 | Data-Matching Laboratory (`EntityMatchingWorld`) | Procedural 3D Geometry (`LineSegments`, record clusters, prism) | `src/three/models/EntityMatchingWorld.jsx` | Original (project codebase) | Project-owned | No | Active in M4 |
@@ -38,7 +38,8 @@ Every external or generated media asset (3D models, textures, fonts, audio, icon
 | Lunar Research Station (`LunarStationWorld`) | Procedural 3D Geometry (cratered heightfield terrain, optical orbiter) | `src/three/models/LunarStationWorld.jsx` | Original (project codebase) | Project-owned | No | Active in M4 |
 | Builder’s Workshop (`BuilderWorkshopWorld`) | Procedural 3D Geometry (blueprint grid, modular blocks, gears) | `src/three/models/BuilderWorkshopWorld.jsx` | Original (project codebase) | Project-owned | No | Active in M4 |
 | Achievement Hall Honors Gallery & 6 Trophy Pedestals | Procedural 3D Geometry (ceremonial arch, pedestals, trophy/certificate emblems) | `src/scenes/AchievementScene.jsx` | Original (project codebase) | Project-owned | No | Active in M5 |
-| Contact Portal Dimensional Beacon & Relay Nodes | Procedural 3D Geometry (astrolabe beacon, pulse rings, 3 channel relays) | `src/scenes/ContactScene.jsx` | Original (project codebase) | Project-owned | No | Active in M5 |
+| Contact Portal Dimensional Beacon & 5 Channel Relay Nodes | Procedural 3D Geometry (astrolabe beacon, pulse rings, 5 channel relays) | `src/scenes/ContactScene.jsx` | Original (project codebase) | Project-owned | No | Active (Upgraded Post-M6) |
+| Downloadable Curriculum Vitae (`Aarav_Raj_CV.pdf`) | PDF 1.4 Document (Standard Helvetica Type1) | `public/Aarav_Raj_CV.pdf` | Owner-verified CV content | Owner-owned | No | Active (Added Post-M6) |
 
 _No external GLB/GLTF models added yet._
 

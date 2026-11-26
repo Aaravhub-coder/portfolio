@@ -10,11 +10,89 @@ export const PROFILE = {
     'Passionate about building intelligent systems and solving real-world problems through AI, analytics, and practical technology solutions.',
   contact: {
     email: 'aaravrajgo@gmail.com',
+    phone: '+91-9523512702',
+    phoneHref: 'tel:+919523512702',
+    cvUrl: '/Aarav_Raj_CV.pdf',
+    cvFileName: 'Aarav_Raj_CV.pdf',
     github: 'https://github.com/Aaravhub-coder',
     githubLabel: 'github.com/Aaravhub-coder',
     linkedin: 'https://www.linkedin.com/in/aarav-raj-a2a49135b',
     linkedinLabel: 'linkedin.com/in/aarav-raj-a2a49135b',
   },
+  libraryChapters: [
+    {
+      id: 'profile',
+      numeral: 'I',
+      title: 'Profile',
+      subtitle: 'Identity & Mission',
+      leftHeading: 'Chapter I · Profile',
+      rightHeading: 'Core Positioning',
+      leftLines: [
+        'Aarav Raj',
+        'Aspiring AI Engineer',
+        'B.Tech (Data Science & AI)',
+        'The ICFAI University, Dehradun',
+      ],
+      rightLines: [
+        'Building intelligent systems',
+        'Solving real-world problems',
+        'AI, analytics & practical tech',
+        'Python · SQL · ML Foundations',
+      ],
+      paragraphs: [
+        'Passionate about building intelligent systems and solving real-world problems through AI, analytics, and practical technology solutions.',
+        'Currently pursuing a B.Tech in Data Science & Artificial Intelligence at The ICFAI University, Dehradun (2024–2028), focusing on Python, SQL, Exploratory Data Analysis, Scikit-learn, and foundational Machine Learning while learning TensorFlow.',
+      ],
+    },
+    {
+      id: 'story',
+      numeral: 'II',
+      title: 'Personal Story',
+      subtitle: 'Dangerously Curious',
+      leftHeading: 'Chapter II · Personal Story',
+      rightHeading: 'Learning by Building',
+      leftLines: [
+        'Not a wizard.',
+        'Not a superhero.',
+        'Just dangerously curious.',
+        'Explorer of algorithms.',
+      ],
+      rightLines: [
+        'Financial Anomaly Detection',
+        'Business Entity Resolution',
+        'SolarQuest & SANGYAN Shield',
+        'Chandrayaan-2 Lunar Research',
+      ],
+      paragraphs: [
+        'Driven by relentless curiosity rather than hype, Aarav approaches artificial intelligence as an explorer and builder—turning classroom concepts into practical, testable systems.',
+        'Across hackathons and independent projects, that curiosity has led to building statistical and ML anomaly detection for stock data, multi-source business matching pipelines with TF-IDF and XGBoost, rooftop solar recommendation workflows on Android, FastAPI-connected mobile cybersecurity detection, database-backed Flask web applications, and a proposed research pipeline for Chandrayaan-2 lunar optical imagery.',
+        'Recognized as Runner-Up at ByteVerse 1.0 and GNA University Hackathon 4.0 and placed among the Top 100 at SANGYAN Hackathon (IIT BHU), he continues deepening his engineering foundations as an active learner in Data Science & Artificial Intelligence.',
+      ],
+    },
+    {
+      id: 'education',
+      numeral: 'III',
+      title: 'Education',
+      subtitle: 'Academic Chronicle',
+      leftHeading: 'Chapter III · Education',
+      rightHeading: 'Verified Milestones',
+      leftLines: [
+        '2024–2028 · B.Tech (DS & AI)',
+        'The ICFAI University, Dehradun',
+        '2023 · Class XII',
+        '2021 · Class X',
+      ],
+      rightLines: [
+        'Undergraduate Engineering',
+        'Data Science & AI Track',
+        'Manas Bharti Educational',
+        'Complex · Foundation Years',
+      ],
+      paragraphs: [
+        'Aarav’s formal academic foundation pairs undergraduate engineering in Data Science & Artificial Intelligence with continuous self-directed study and hackathon execution.',
+      ],
+    },
+  ],
   education: [
     {
       id: 'icfai-btech',
@@ -46,7 +124,7 @@ export const HUB_PORTALS = [
     title: 'Ancient Library',
     subtitle: 'About & Education',
     description:
-      'Step into the archive to explore Aarav Raj’s academic foundation and curiosity-driven journey in AI.',
+      'Step into the magical archive to open the giant floating ancient book and explore Aarav’s profile, story, and education.',
     accent: '#E7BD72',
     secondaryAccent: '#8F5B3C',
     sigil: 'tome',
@@ -102,7 +180,7 @@ export const HUB_PORTALS = [
     title: 'Contact Portal',
     subtitle: 'Connect with Aarav',
     description:
-      'Open direct channels via Email, GitHub, and LinkedIn for internships, collaborations, and opportunities.',
+      'Open direct channels via Email, Phone, downloadable CV, GitHub, and LinkedIn for internships and opportunities.',
     accent: '#83D9DC',
     secondaryAccent: '#E7BD72',
     sigil: 'beacon',

@@ -15,6 +15,8 @@ export const SCENES = {
   CONTACT: 'contact',
 };
 
+const CHAPTER_IDS = ['profile', 'story', 'education'];
+
 export const useExperienceStore = create((set) => ({
   activeScene: SCENES.GATEWAY,
   activeProjectId: null,
@@ -28,8 +30,14 @@ export const useExperienceStore = create((set) => ({
   webglError: null,
   reducedMotion: getInitialReducedMotion(),
 
-  // World-specific interactive state (M3–M5)
-  activeLibraryChapter: 'chronicle',
+  // Ancient Library giant interactive book state
+  libraryBookOpen: false,
+  libraryChapterIndex: 0, // 0: profile, 1: story, 2: education
+  libraryTurningDir: 0, // -1: prev page, 0: idle, 1: next page
+  libraryTurnNonce: 0,
+  activeLibraryChapter: CHAPTER_IDS[0],
+
+  // World-specific interactive state
   selectedSkillCategory: 'all',
   highlightedSkill: null,
   selectedAchievementId: null,
@@ -46,6 +54,10 @@ export const useExperienceStore = create((set) => ({
       highlightedSkill: null,
       selectedAchievementId: null,
       hoveredContactChannel: null,
+      libraryBookOpen: false,
+      libraryChapterIndex: 0,
+      libraryTurningDir: 0,
+      activeLibraryChapter: CHAPTER_IDS[0],
     }),
 
   selectProject: (projectId) =>
@@ -63,6 +75,10 @@ export const useExperienceStore = create((set) => ({
       panelHidden: false,
       selectedAchievementId: null,
       hoveredContactChannel: null,
+      libraryBookOpen: false,
+      libraryChapterIndex: 0,
+      libraryTurningDir: 0,
+      activeLibraryChapter: CHAPTER_IDS[0],
     }),
 
   returnToGateway: () =>
@@ -71,6 +87,10 @@ export const useExperienceStore = create((set) => ({
       activeProjectId: null,
       hoveredPortal: null,
       panelHidden: false,
+      libraryBookOpen: false,
+      libraryChapterIndex: 0,
+      libraryTurningDir: 0,
+      activeLibraryChapter: CHAPTER_IDS[0],
     }),
 
   setHoveredPortal: (portalId) => set({ hoveredPortal: portalId }),
@@ -87,13 +107,82 @@ export const useExperienceStore = create((set) => ({
     }),
   setReducedMotion: (reducedMotion) => set({ reducedMotion }),
 
-  setActiveLibraryChapter: (activeLibraryChapter) =>
-    set({ activeLibraryChapter }),
-  toggleLibraryChapter: () =>
+  // Ancient Library Giant Book actions
+  openLibraryBook: () => set({ libraryBookOpen: true }),
+  closeLibraryBook: () =>
+    set({ libraryBookOpen: false, libraryTurningDir: 0 }),
+  toggleLibraryBook: () =>
     set((state) => ({
-      activeLibraryChapter:
-        state.activeLibraryChapter === 'chronicle' ? 'education' : 'chronicle',
+      libraryBookOpen: !state.libraryBookOpen,
+      libraryTurningDir: 0,
     })),
+  setLibraryChapterIndex: (nextIndex) =>
+    set((state) => {
+      const clamped = Math.max(0, Math.min(CHAPTER_IDS.length - 1, nextIndex));
+      if (!state.libraryBookOpen) {
+        return {
+          libraryBookOpen: true,
+          libraryChapterIndex: clamped,
+          activeLibraryChapter: CHAPTER_IDS[clamped],
+          libraryTurningDir: 0,
+        };
+      }
+      if (clamped === state.libraryChapterIndex) {
+        return state;
+      }
+      return {
+        libraryBookOpen: true,
+        libraryChapterIndex: clamped,
+        activeLibraryChapter: CHAPTER_IDS[clamped],
+        libraryTurningDir: clamped > state.libraryChapterIndex ? 1 : -1,
+        libraryTurnNonce: state.libraryTurnNonce + 1,
+      };
+    }),
+  stepLibraryChapter: (delta) =>
+    set((state) => {
+      const next = state.libraryChapterIndex + delta;
+      if (next < 0 || next >= CHAPTER_IDS.length) return state;
+      return {
+        libraryBookOpen: true,
+        libraryChapterIndex: next,
+        activeLibraryChapter: CHAPTER_IDS[next],
+        libraryTurningDir: delta >= 0 ? 1 : -1,
+        libraryTurnNonce: state.libraryTurnNonce + 1,
+      };
+    }),
+  clearLibraryTurning: () => set({ libraryTurningDir: 0 }),
+
+  // Backwards-compatible helpers
+  setActiveLibraryChapter: (chapterId) =>
+    set((state) => {
+      const idx = CHAPTER_IDS.indexOf(chapterId);
+      const target = idx >= 0 ? idx : 0;
+      const dir =
+        state.libraryBookOpen && target !== state.libraryChapterIndex
+          ? target > state.libraryChapterIndex
+            ? 1
+            : -1
+          : 0;
+      return {
+        libraryBookOpen: true,
+        libraryChapterIndex: target,
+        activeLibraryChapter: CHAPTER_IDS[target],
+        libraryTurningDir: dir,
+        libraryTurnNonce: dir !== 0 ? state.libraryTurnNonce + 1 : state.libraryTurnNonce,
+      };
+    }),
+  toggleLibraryChapter: () =>
+    set((state) => {
+      const next = (state.libraryChapterIndex + 1) % CHAPTER_IDS.length;
+      return {
+        libraryBookOpen: true,
+        libraryChapterIndex: next,
+        activeLibraryChapter: CHAPTER_IDS[next],
+        libraryTurningDir: 1,
+        libraryTurnNonce: state.libraryTurnNonce + 1,
+      };
+    }),
+
   setSelectedSkillCategory: (selectedSkillCategory) =>
     set({ selectedSkillCategory, highlightedSkill: null }),
   setHighlightedSkill: (highlightedSkill) => set({ highlightedSkill }),

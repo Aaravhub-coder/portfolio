@@ -13,6 +13,8 @@ export default function CameraController() {
   const transitionFocus = useExperienceStore((s) => s.transitionFocus);
   const reducedMotion = useExperienceStore((s) => s.reducedMotion);
   const panelHidden = useExperienceStore((s) => s.panelHidden);
+  const libraryBookOpen = useExperienceStore((s) => s.libraryBookOpen);
+  const libraryChapterIndex = useExperienceStore((s) => s.libraryChapterIndex);
 
   const pointerRef = useRef({ x: 0, y: 0 });
   const basePosRef = useRef({ x: 0, y: 0.08, z: 7.2 });
@@ -43,9 +45,24 @@ export default function CameraController() {
       targetY = isNarrow ? 1.85 : 1.48;
       targetZ = isNarrow ? 11.8 : isMedium ? 9.1 : 7.35;
     } else if (activeScene === SCENES.LIBRARY) {
-      targetX = useDesktopSplitOffset ? 1.3 : 0;
-      targetY = isNarrow ? 2.05 : 1.72;
-      targetZ = isNarrow ? 7.6 : 5.75;
+      // Cinematic choreography: Archive Establishing Shot (closed) -> Dramatic Tome Reading Angle (open + chapter drift)
+      const chapterOffset = libraryBookOpen ? (libraryChapterIndex - 1) * 0.22 : 0;
+      const splitOffset = useDesktopSplitOffset ? (libraryBookOpen ? 1.18 : 1.32) : 0;
+      targetX = splitOffset + chapterOffset;
+      targetY = isNarrow
+        ? libraryBookOpen
+          ? 2.15
+          : 2.05
+        : libraryBookOpen
+          ? 1.98
+          : 1.78;
+      targetZ = isNarrow
+        ? libraryBookOpen
+          ? 6.9
+          : 7.8
+        : libraryBookOpen
+          ? 4.75
+          : 6.1;
     } else if (activeScene === SCENES.AILAB) {
       targetX = useDesktopSplitOffset ? 1.25 : 0;
       targetY = isNarrow ? 1.9 : 1.55;
@@ -79,7 +96,7 @@ export default function CameraController() {
       x: targetX,
       y: targetY,
       z: targetZ,
-      duration: 1.0,
+      duration: 1.1,
       ease: 'power3.out',
       overwrite: 'auto',
     });
@@ -92,6 +109,8 @@ export default function CameraController() {
     reducedMotion,
     camera,
     useDesktopSplitOffset,
+    libraryBookOpen,
+    libraryChapterIndex,
   ]);
 
   useEffect(() => {
@@ -139,7 +158,12 @@ export default function CameraController() {
 
   useFrame((_, delta) => {
     const smooth = 1 - Math.exp(-Math.min(delta, 0.05) * 4.2);
-    const parallaxScale = reducedMotion || isTransitioning ? 0 : 0.3;
+    const parallaxScale =
+      reducedMotion || isTransitioning
+        ? 0
+        : activeScene === SCENES.LIBRARY && libraryBookOpen
+          ? 0.16
+          : 0.3;
 
     const focusedPortal =
       activeScene === SCENES.HUB && hoveredPortal
@@ -174,9 +198,9 @@ export default function CameraController() {
       targetLookY = focusedPortal ? focusedPortal.position[1] - 0.28 : 0.72;
       targetLookZ = -1.2;
     } else if (activeScene === SCENES.LIBRARY) {
-      targetLookX = useDesktopSplitOffset ? 1.15 : 0;
-      targetLookY = 1.25;
-      targetLookZ = -0.65;
+      targetLookX = useDesktopSplitOffset ? (libraryBookOpen ? 0.92 : 1.12) : 0;
+      targetLookY = libraryBookOpen ? 1.44 : 1.38;
+      targetLookZ = -0.22;
     } else if (activeScene === SCENES.AILAB) {
       targetLookX = useDesktopSplitOffset ? 1.15 : 0;
       targetLookY = 1.15;
