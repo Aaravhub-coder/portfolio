@@ -27,6 +27,8 @@ Every external or generated media asset (3D models, textures, fonts, audio, icon
 | Cosmic Portal Vortex | Procedural GLSL Shader (`ShaderMaterial`) | `src/scenes/GatewayScene.jsx` | Original (project codebase) | Project-owned | No | Active in M1 |
 | Cosmic Starfield & Energy Motes | Procedural Particle Points + Canvas Sprite | `src/three/Particles.jsx` | Original (project codebase) | Project-owned | No | Active in M1 |
 | 2D Fallback Astrolabe Portal | Inline SVG | `src/ui/HeroOverlay.jsx` | Original (project codebase) | Project-owned | No | Active in M1 |
+| Multiverse Hub Sanctuary & 5 Dimensional Portals | Procedural 3D Geometry + GLSL Vortex Shader | `src/scenes/MultiverseScene.jsx`, `src/components/Portal.jsx` | Original (project codebase) | Project-owned | No | Active in M2 |
+| Destination World Chamber Backdrop | Procedural 3D Torus & Core Geometry | `src/scenes/WorldChamberBackdrop.jsx` | Original (project codebase) | Project-owned | No | Active in M2 |
 
 _No external GLB/GLTF models added yet._
 

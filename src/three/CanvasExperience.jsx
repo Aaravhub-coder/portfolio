@@ -1,12 +1,19 @@
-import { Component, Suspense, useEffect, useMemo, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
+import { Component, Suspense, lazy, useEffect, useRef } from 'react';
+import { Canvas } from '@react-three/fiber';
 import Lighting from './Lighting.jsx';
 import Particles from './Particles.jsx';
 import CameraController from './CameraController.jsx';
 import GatewayScene from '../scenes/GatewayScene.jsx';
 import { SCENES, useExperienceStore } from '../store/experienceStore.js';
 import { useTabVisibility } from '../hooks/useTabVisibility.js';
+
+// Lazy-load scenes on demand so only one active 3D environment mounts at a time
+const MultiverseScene = lazy(() => import('../scenes/MultiverseScene.jsx'));
+const LibraryScene = lazy(() => import('../scenes/LibraryScene.jsx'));
+const AILabScene = lazy(() => import('../scenes/AILabScene.jsx'));
+const ProjectWorldScene = lazy(() => import('../scenes/ProjectWorldScene.jsx'));
+const AchievementScene = lazy(() => import('../scenes/AchievementScene.jsx'));
+const ContactScene = lazy(() => import('../scenes/ContactScene.jsx'));
 
 function detectWebGLSupport() {
   if (typeof window === 'undefined') return true;
@@ -44,62 +51,7 @@ class WebGLErrorBoundary extends Component {
   }
 }
 
-/* Lightweight ambient backdrop for the M1 Hub Arrival state (full 5-portal 3D Hub launches in M2) */
-function HubArrivalBackdrop() {
-  const reducedMotion = useExperienceStore((s) => s.reducedMotion);
-  const ringRef = useRef(null);
-
-  const geometries = useMemo(
-    () => ({
-      horizonRing: new THREE.TorusGeometry(2.85, 0.02, 12, 96),
-      innerHalo: new THREE.TorusGeometry(2.2, 0.012, 12, 96),
-    }),
-    []
-  );
-
-  const materials = useMemo(
-    () => ({
-      gold: new THREE.MeshStandardMaterial({
-        color: '#e7bd72',
-        emissive: '#6e4e18',
-        emissiveIntensity: 0.45,
-        metalness: 0.75,
-        roughness: 0.3,
-      }),
-      cyan: new THREE.MeshStandardMaterial({
-        color: '#83d9dc',
-        emissive: '#83d9dc',
-        emissiveIntensity: 0.7,
-        metalness: 0.3,
-        roughness: 0.25,
-      }),
-    }),
-    []
-  );
-
-  useEffect(() => {
-    return () => {
-      geometries.horizonRing.dispose();
-      geometries.innerHalo.dispose();
-      materials.gold.dispose();
-      materials.cyan.dispose();
-    };
-  }, [geometries, materials]);
-
-  useFrame((_, delta) => {
-    if (reducedMotion || !ringRef.current) return;
-    ringRef.current.rotation.z += Math.min(delta, 0.05) * 0.08;
-  });
-
-  return (
-    <group ref={ringRef} position={[0, -0.35, -1.4]} rotation={[Math.PI * 0.38, 0, 0]}>
-      <mesh geometry={geometries.horizonRing} material={materials.gold} />
-      <mesh geometry={geometries.innerHalo} material={materials.cyan} />
-    </group>
-  );
-}
-
-export default function CanvasExperience({ onEnterGateway }) {
+export default function CanvasExperience({ onEnterGateway, onSelectPortal }) {
   const activeScene = useExperienceStore((s) => s.activeScene);
   const viewMode = useExperienceStore((s) => s.viewMode);
   const setCanvasReady = useExperienceStore((s) => s.setCanvasReady);
@@ -131,7 +83,7 @@ export default function CanvasExperience({ onEnterGateway }) {
         <Canvas
           dpr={[1, 1.75]}
           frameloop={isTabVisible ? 'always' : 'never'}
-          camera={{ position: [0, 0.12, 6.8], fov: 45, near: 0.1, far: 60 }}
+          camera={{ position: [0, 0.08, 7.2], fov: 46, near: 0.1, far: 65 }}
           gl={{
             antialias: true,
             alpha: false,
@@ -153,17 +105,23 @@ export default function CanvasExperience({ onEnterGateway }) {
           }}
         >
           <color attach="background" args={['#100d16']} />
-          <fog attach="fog" args={['#100d16', 11, 28]} />
+          <fog attach="fog" args={['#100d16', 11, 30]} />
           <Lighting />
           <CameraController />
           <Particles starCount={420} moteCount={220} />
 
           <Suspense fallback={null}>
-            {activeScene === SCENES.GATEWAY ? (
+            {activeScene === SCENES.GATEWAY && (
               <GatewayScene onEnter={onEnterGateway} />
-            ) : (
-              <HubArrivalBackdrop />
             )}
+            {activeScene === SCENES.HUB && (
+              <MultiverseScene onSelectPortal={onSelectPortal} />
+            )}
+            {activeScene === SCENES.LIBRARY && <LibraryScene />}
+            {activeScene === SCENES.AILAB && <AILabScene />}
+            {activeScene === SCENES.PROJECTS && <ProjectWorldScene />}
+            {activeScene === SCENES.ACHIEVEMENTS && <AchievementScene />}
+            {activeScene === SCENES.CONTACT && <ContactScene />}
           </Suspense>
         </Canvas>
       </WebGLErrorBoundary>

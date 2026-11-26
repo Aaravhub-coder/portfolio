@@ -1,6 +1,8 @@
-import { ArrowLeft, ArrowRight, Box, Code2, Compass, ExternalLink, Layers, Mail, Sparkles } from 'lucide-react';
-import AudioController from '../components/AudioController.jsx';
+import { ArrowLeft, ArrowRight, Code2, Compass, ExternalLink, Mail, Sparkles } from 'lucide-react';
+import { ACHIEVEMENTS } from '../data/achievements.js';
 import { HUB_PORTALS, PROFILE } from '../data/profile.js';
+import { PROJECTS } from '../data/projects.js';
+import { SKILL_CATEGORIES } from '../data/skills.js';
 import { SCENES, useExperienceStore } from '../store/experienceStore.js';
 
 function FallbackPortalGraphic() {
@@ -61,178 +63,203 @@ function FallbackPortalGraphic() {
   );
 }
 
-export default function HeroOverlay({ onEnterGateway, onReturnGateway }) {
+function WorldDestinationSummary({ sceneId }) {
+  if (sceneId === SCENES.LIBRARY) {
+    return (
+      <div className="world-stub-list">
+        <p className="world-stub-quote">“{PROFILE.summary}”</p>
+        {PROFILE.education.map((edu) => (
+          <div key={edu.id} className="world-stub-item">
+            <strong>{edu.institution}</strong>
+            <span>
+              {edu.qualification} · {edu.period}
+            </span>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (sceneId === SCENES.AILAB) {
+    return (
+      <div className="world-stub-chips">
+        {SKILL_CATEGORIES.flatMap((cat) => cat.items).map((skill) => (
+          <span key={skill.name} className="world-chip">
+            {skill.name}
+          </span>
+        ))}
+      </div>
+    );
+  }
+
+  if (sceneId === SCENES.PROJECTS) {
+    return (
+      <div className="world-stub-list">
+        {PROJECTS.map((project) => (
+          <div key={project.id} className="world-stub-item">
+            <strong>{project.title}</strong>
+            <span>
+              {project.subtitle} · <em>{project.status}</em>
+            </span>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (sceneId === SCENES.ACHIEVEMENTS) {
+    return (
+      <div className="world-stub-list">
+        {ACHIEVEMENTS.map((item) => (
+          <div key={item.id} className="world-stub-item">
+            <strong>{item.title}</strong>
+            <span>{item.detail}</span>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (sceneId === SCENES.CONTACT) {
+    return (
+      <div className="hub-preview-footer world-stub-contact">
+        <a href={`mailto:${PROFILE.contact.email}`} className="hub-link">
+          <Mail size={15} aria-hidden="true" />
+          <span>{PROFILE.contact.email}</span>
+        </a>
+        <a
+          href={PROFILE.contact.github}
+          target="_blank"
+          rel="noreferrer"
+          className="hub-link"
+        >
+          <Code2 size={15} aria-hidden="true" />
+          <span>{PROFILE.contact.githubLabel}</span>
+        </a>
+        <a
+          href={PROFILE.contact.linkedin}
+          target="_blank"
+          rel="noreferrer"
+          className="hub-link"
+        >
+          <ExternalLink size={15} aria-hidden="true" />
+          <span>{PROFILE.contact.linkedinLabel}</span>
+        </a>
+      </div>
+    );
+  }
+
+  return null;
+}
+
+export default function HeroOverlay({
+  onEnterGateway,
+  onReturnHub,
+  onSelectPortal,
+}) {
   const activeScene = useExperienceStore((s) => s.activeScene);
   const viewMode = useExperienceStore((s) => s.viewMode);
-  const webglError = useExperienceStore((s) => s.webglError);
   const isTransitioning = useExperienceStore((s) => s.isTransitioning);
-  const reducedMotion = useExperienceStore((s) => s.reducedMotion);
-  const setViewMode = useExperienceStore((s) => s.setViewMode);
 
-  const toggleViewMode = () => {
-    if (webglError) return;
-    setViewMode(viewMode === '3d' ? '2d' : '3d');
-  };
+  if (activeScene === SCENES.GATEWAY) {
+    return (
+      <main className="gateway-layout">
+        {viewMode === '2d' ? (
+          <FallbackPortalGraphic />
+        ) : (
+          <div className="gateway-spacer" aria-hidden="true" />
+        )}
+
+        <section
+          className={`hero-panel ${isTransitioning ? 'hero-panel--exiting' : ''}`}
+          aria-labelledby="gateway-heading"
+        >
+          <p className="hero-eyebrow">{PROFILE.brandSubtitle}</p>
+          <h1 id="gateway-heading" className="hero-title">
+            {PROFILE.brandTitle}
+          </h1>
+          <p className="hero-tagline">“{PROFILE.primaryTagline}”</p>
+          <p className="hero-identity">
+            <strong>{PROFILE.name}</strong> — {PROFILE.role}.
+            <span className="hero-supporting"> {PROFILE.supportingLine}</span>
+          </p>
+
+          <div className="hero-actions">
+            <button
+              type="button"
+              className="btn-enter"
+              onClick={onEnterGateway}
+              disabled={isTransitioning}
+            >
+              <Sparkles size={16} aria-hidden="true" />
+              <span>ENTER</span>
+              <ArrowRight size={16} aria-hidden="true" />
+            </button>
+          </div>
+
+          <p className="hero-hint">
+            {viewMode === '3d'
+              ? 'Click the portal or press ENTER to cross into the Multiverse Hub'
+              : 'Accessible 2D mode active — press ENTER to explore the Multiverse Hub'}
+          </p>
+        </section>
+      </main>
+    );
+  }
+
+  // Destination World Arrival Panel (lazy-loaded 3D world route verified in M2; full rich worlds build in M3–M5)
+  const portal = HUB_PORTALS.find((p) => p.id === activeScene);
+  if (!portal) return null;
 
   return (
-    <div className="hud-root">
-      <header className="hud-topbar">
-        <div className="hud-brand">
-          <span className="hud-brand__monogram">{PROFILE.initials}</span>
-          <span className="hud-brand__label">Chronicles of Aarav</span>
-        </div>
+    <main className="hub-preview-layout">
+      <section
+        className={`hub-preview-card ${isTransitioning ? 'hero-panel--exiting' : ''}`}
+        aria-labelledby="world-heading"
+      >
+        <div className="hub-preview-header">
+          <div>
+            <p className="hero-eyebrow">
+              <Compass size={14} aria-hidden="true" /> {portal.subtitle}
+            </p>
+            <h1 id="world-heading" className="hub-preview-title">
+              {portal.title}
+            </h1>
+          </div>
 
-        <nav className="hud-controls" aria-label="Experience controls">
-          {reducedMotion && (
-            <span className="hud-tag" title="System reduced motion preference active">
-              Reduced Motion
-            </span>
-          )}
           <button
             type="button"
-            className={`hud-pill ${viewMode === '2d' ? 'hud-pill--active' : ''}`}
-            onClick={toggleViewMode}
-            disabled={Boolean(webglError)}
-            aria-pressed={viewMode === '2d'}
-            title={
-              webglError
-                ? '2D Fallback active (WebGL unavailable)'
-                : viewMode === '3d'
-                  ? 'Switch to accessible 2D view'
-                  : 'Switch back to immersive 3D view'
-            }
+            className="btn-secondary"
+            onClick={onReturnHub}
+            disabled={isTransitioning}
           >
-            {viewMode === '3d' ? (
-              <>
-                <Layers size={15} aria-hidden="true" />
-                <span>2D View</span>
-              </>
-            ) : (
-              <>
-                <Box size={15} aria-hidden="true" />
-                <span>{webglError ? '2D Fallback' : '3D View'}</span>
-              </>
-            )}
+            <ArrowLeft size={15} aria-hidden="true" />
+            <span>Return to Multiverse Hub</span>
           </button>
-          <AudioController />
-        </nav>
-      </header>
+        </div>
 
-      {activeScene === SCENES.GATEWAY ? (
-        <main className="gateway-layout">
-          {viewMode === '2d' ? (
-            <FallbackPortalGraphic />
-          ) : (
-            <div className="gateway-spacer" aria-hidden="true" />
-          )}
+        <p className="hub-preview-intro">{portal.description}</p>
+        <p className="world-milestone-badge">{portal.milestoneNote}</p>
 
-          <section
-            className={`hero-panel ${isTransitioning ? 'hero-panel--exiting' : ''}`}
-            aria-labelledby="gateway-heading"
-          >
-            <p className="hero-eyebrow">{PROFILE.brandSubtitle}</p>
-            <h1 id="gateway-heading" className="hero-title">
-              {PROFILE.brandTitle}
-            </h1>
-            <p className="hero-tagline">“{PROFILE.primaryTagline}”</p>
-            <p className="hero-identity">
-              <strong>{PROFILE.name}</strong> — {PROFILE.role}.
-              <span className="hero-supporting"> {PROFILE.supportingLine}</span>
-            </p>
+        <WorldDestinationSummary sceneId={activeScene} />
 
-            <div className="hero-actions">
+        <footer className="world-other-links" aria-label="Jump to another world">
+          <span className="world-other-links__label">Explore another realm:</span>
+          <div className="world-other-links__pills">
+            {HUB_PORTALS.filter((item) => item.id !== activeScene).map((item) => (
               <button
+                key={item.id}
                 type="button"
-                className="btn-enter"
-                onClick={onEnterGateway}
+                className="hud-pill"
+                onClick={() => onSelectPortal(item)}
                 disabled={isTransitioning}
               >
-                <Sparkles size={16} aria-hidden="true" />
-                <span>ENTER</span>
-                <ArrowRight size={16} aria-hidden="true" />
+                {item.title}
               </button>
-            </div>
-
-            <p className="hero-hint">
-              {viewMode === '3d'
-                ? 'Click the portal or press ENTER to cross into the Multiverse Hub'
-                : 'Accessible 2D mode active — press ENTER to explore the Multiverse Hub'}
-            </p>
-          </section>
-        </main>
-      ) : (
-        <main className="hub-preview-layout">
-          <section className="hub-preview-card" aria-labelledby="hub-arrival-heading">
-            <div className="hub-preview-header">
-              <div>
-                <p className="hero-eyebrow">
-                  <Compass size={14} aria-hidden="true" /> Multiverse Hub · Portal Destination
-                </p>
-                <h1 id="hub-arrival-heading" className="hub-preview-title">
-                  Gateway Crossed
-                </h1>
-              </div>
-
-              <button
-                type="button"
-                className="btn-secondary"
-                onClick={onReturnGateway}
-                disabled={isTransitioning}
-              >
-                <ArrowLeft size={15} aria-hidden="true" />
-                <span>Return to Gateway</span>
-              </button>
-            </div>
-
-            <p className="hub-preview-intro">
-              Welcome to the <strong>Multiverse of Intelligence</strong>. The five
-              interactive 3D Hub portals and individual worlds unlock in Milestones
-              M2–M5; preview the realms below or reach {PROFILE.name} directly.
-            </p>
-
-            <div className="hub-preview-grid" role="list">
-              {HUB_PORTALS.map((portal) => (
-                <article
-                  key={portal.id}
-                  className="hub-preview-tile"
-                  role="listitem"
-                >
-                  <span className="hub-preview-tile__subtitle">
-                    {portal.subtitle}
-                  </span>
-                  <h2 className="hub-preview-tile__title">{portal.title}</h2>
-                  <p className="hub-preview-tile__desc">{portal.description}</p>
-                </article>
-              ))}
-            </div>
-
-            <footer className="hub-preview-footer">
-              <a href={`mailto:${PROFILE.contact.email}`} className="hub-link">
-                <Mail size={15} aria-hidden="true" />
-                <span>{PROFILE.contact.email}</span>
-              </a>
-              <a
-                href={PROFILE.contact.github}
-                target="_blank"
-                rel="noreferrer"
-                className="hub-link"
-              >
-                <Code2 size={15} aria-hidden="true" />
-                <span>GitHub</span>
-              </a>
-              <a
-                href={PROFILE.contact.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="hub-link"
-              >
-                <ExternalLink size={15} aria-hidden="true" />
-                <span>LinkedIn</span>
-              </a>
-            </footer>
-          </section>
-        </main>
-      )}
-    </div>
+            ))}
+          </div>
+        </footer>
+      </section>
+    </main>
   );
 }

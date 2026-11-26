@@ -21,6 +21,7 @@ export const useExperienceStore = create((set) => ({
   hoveredPortal: null,
   isTransitioning: false,
   transitionLabel: '',
+  transitionFocus: null, // Optional [x, y, z] 3D portal target for GSAP camera dive
   canvasReady: false,
   audioEnabled: false, // Strictly muted by default per brief
   viewMode: '3d', // Falls back to '2d' on WebGL failure or user preference
@@ -55,8 +56,8 @@ export const useExperienceStore = create((set) => ({
     }),
 
   setHoveredPortal: (portalId) => set({ hoveredPortal: portalId }),
-  setIsTransitioning: (isTransitioning, transitionLabel = '') =>
-    set({ isTransitioning, transitionLabel }),
+  setIsTransitioning: (isTransitioning, transitionLabel = '', transitionFocus = null) =>
+    set({ isTransitioning, transitionLabel, transitionFocus }),
   setCanvasReady: (canvasReady) => set({ canvasReady }),
   toggleAudio: () => set((state) => ({ audioEnabled: !state.audioEnabled })),
   setViewMode: (viewMode) => set({ viewMode }),

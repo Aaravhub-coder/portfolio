@@ -48,6 +48,12 @@ export const HUB_PORTALS = [
     description:
       'Step into the archive to explore Aarav Raj’s academic foundation and curiosity-driven journey in AI.',
     accent: '#E7BD72',
+    secondaryAccent: '#8F5B3C',
+    sigil: 'tome',
+    position: [-3.75, 1.25, -0.45],
+    rotationY: 0.42,
+    scale: 0.94,
+    milestoneNote: 'Full 3D Ancient Library world arrives in Milestone M3.',
   },
   {
     id: 'ailab',
@@ -56,6 +62,12 @@ export const HUB_PORTALS = [
     description:
       'Inspect the languages, machine learning libraries, and tools powering Aarav’s experiments.',
     accent: '#83D9DC',
+    secondaryAccent: '#487EA3',
+    sigil: 'neural',
+    position: [-1.92, 1.32, -1.6],
+    rotationY: 0.2,
+    scale: 0.98,
+    milestoneNote: 'Full 3D AI Laboratory world arrives in Milestone M3.',
   },
   {
     id: 'projects',
@@ -64,14 +76,26 @@ export const HUB_PORTALS = [
     description:
       'Travel across six distinct worlds spanning financial anomaly detection, entity resolution, clean energy, cybersecurity, lunar imagery, and web systems.',
     accent: '#E7BD72',
+    secondaryAccent: '#83D9DC',
+    sigil: 'constellation',
+    position: [0, 1.46, -2.1],
+    rotationY: 0,
+    scale: 1.12,
+    milestoneNote: 'All six dedicated 3D Project Worlds arrive in Milestone M4.',
   },
   {
     id: 'achievements',
     title: 'Achievement Hall',
     subtitle: 'Awards & Certifications',
     description:
-      'Browse verified hackathon recognitions, certifications, and milestones.',
-    accent: '#56334D',
+      'Browse verified hackathon recognitions, certifications, and learning milestones.',
+    accent: '#E7BD72',
+    secondaryAccent: '#9A5B8E',
+    sigil: 'crest',
+    position: [1.92, 1.32, -1.6],
+    rotationY: -0.2,
+    scale: 0.98,
+    milestoneNote: 'Full 3D Achievement Hall gallery arrives in Milestone M5.',
   },
   {
     id: 'contact',
@@ -80,5 +104,11 @@ export const HUB_PORTALS = [
     description:
       'Open direct channels via Email, GitHub, and LinkedIn for internships, collaborations, and opportunities.',
     accent: '#83D9DC',
+    secondaryAccent: '#E7BD72',
+    sigil: 'beacon',
+    position: [3.75, 1.25, -0.45],
+    rotationY: -0.42,
+    scale: 0.94,
+    milestoneNote: 'Full 3D Contact Portal sanctuary arrives in Milestone M5.',
   },
 ];

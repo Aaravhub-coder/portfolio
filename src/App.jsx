@@ -1,29 +1,54 @@
 import { Suspense, lazy } from 'react';
-import HeroOverlay from './ui/HeroOverlay.jsx';
+import Navigation from './components/Navigation.jsx';
+import PortalLabel from './components/PortalLabel.jsx';
 import LoadingScreen from './components/LoadingScreen.jsx';
 import SceneTransition from './components/SceneTransition.jsx';
+import HeroOverlay from './ui/HeroOverlay.jsx';
 import { usePrefersReducedMotion } from './hooks/usePrefersReducedMotion.js';
 import { useSceneTransition } from './hooks/useSceneTransition.js';
-import { useExperienceStore } from './store/experienceStore.js';
+import { SCENES, useExperienceStore } from './store/experienceStore.js';
 
 const CanvasExperience = lazy(() => import('./three/CanvasExperience.jsx'));
 
 export default function App() {
   usePrefersReducedMotion();
+  const activeScene = useExperienceStore((s) => s.activeScene);
   const viewMode = useExperienceStore((s) => s.viewMode);
-  const { enterMultiverse, returnToGateway } = useSceneTransition();
+  const { enterMultiverse, openPortal, returnToHub, returnToGateway } =
+    useSceneTransition();
 
   return (
     <div className="experience-shell">
       {viewMode === '3d' && (
         <Suspense fallback={null}>
-          <CanvasExperience onEnterGateway={enterMultiverse} />
+          <CanvasExperience
+            onEnterGateway={enterMultiverse}
+            onSelectPortal={openPortal}
+          />
         </Suspense>
       )}
-      <HeroOverlay
-        onEnterGateway={enterMultiverse}
-        onReturnGateway={returnToGateway}
-      />
+
+      <div className="hud-root">
+        <Navigation
+          onSelectPortal={openPortal}
+          onReturnHub={returnToHub}
+          onReturnGateway={returnToGateway}
+        />
+
+        {activeScene === SCENES.HUB ? (
+          <PortalLabel
+            onSelectPortal={openPortal}
+            onReturnGateway={returnToGateway}
+          />
+        ) : (
+          <HeroOverlay
+            onEnterGateway={enterMultiverse}
+            onReturnHub={returnToHub}
+            onSelectPortal={openPortal}
+          />
+        )}
+      </div>
+
       <SceneTransition />
       <LoadingScreen />
     </div>
