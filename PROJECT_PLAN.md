@@ -41,20 +41,20 @@ Typography: `Cinzel` (display), `Manrope` (UI/body), `DM Mono` (labels/metadata)
 - Added persistent accessible top navigation (`src/components/Navigation.jsx`) with quick-jump realm links, Return-to-Hub button, Escape-key shortcut, and synced bottom Portal Dock & Inspector (`src/components/PortalLabel.jsx`) with arrow-key navigation and full 2D Hub fallback mode.
 - Upgraded `CameraController.jsx` and `CanvasExperience.jsx` with portal-focused hover tracking, portal-directed GSAP camera dives, and lazy-loaded (`React.lazy`) single-Canvas world routing across all five destination scenes.
 
-### M3 — Ancient Library & AI Laboratory *(Completed — Pending Owner Review)*
+### M3 — Ancient Library & AI Laboratory *(Completed & Pushed — `97afa6f`)*
 - **Ancient Library (`src/scenes/LibraryScene.jsx` + `src/ui/AboutPanel.jsx`):** Built curved candlelit archive bays with 120 instanced books (1 draw call), flickering floating candle lanterns, an interactive hinged 3D Chronicle Tome that flips between **Profile & Story** and **Education**, and a split-stage glass/parchment panel strictly grounded in Aarav’s CV.
 - **AI Laboratory (`src/scenes/AILabScene.jsx` + `src/ui/SkillsPanel.jsx`):** Built a cyan holographic research platform with an interactive 4-layer 3D neural network (`18` skill nodes + `1` `LineSegments` synaptic web draw call) synced two-way with category filters and honest familiarity tags from `src/data/skills.js`.
 - Added split-stage desktop camera framing and a `"Hide Panel / Inspect 3D"` toggle so visitors can admire both 3D worlds unobstructed or browse recruiter-friendly readable panels in 3D or 2D mode.
 
-### M4 — Project Worlds (6 Environments)
-- Six lazy-loaded visual environments mapped to Aarav’s verified projects:
-  1. **AI Fake Stock Detector** — Financial Data Universe
-  2. **Business Entity Resolution** — Data-Matching Laboratory
-  3. **SolarQuest** — Solar Planet
-  4. **SANGYAN Shield** — Cybersecurity Fortress
-  5. **Chandrayaan-2 Image Correspondence** — Lunar Research Station *(Research Direction / Proposed Pipeline)*
-  6. **SkillHub** — Builder’s Workshop
-- Clear project panels with problem statement, highlights, technologies, verified links, and accurate status labels.
+### M4 — Project Worlds (6 Environments) *(Completed — Pending Owner Review)*
+- Built six lazy-loaded procedural 3D visual environments under `src/three/models/` mounted one at a time by `src/scenes/ProjectWorldScene.jsx`:
+  1. **AI Fake Stock Detector** — Financial Data Universe (`StockUniverseWorld.jsx`: 26 instanced bars + trend curve + pulsing anomaly beacons)
+  2. **Business Entity Resolution** — Data-Matching Laboratory (`EntityMatchingWorld.jsx`: twin record clouds linked via similarity bridges to a central matching prism)
+  3. **SolarQuest** — Solar Planet (`SolarPlanetWorld.jsx`: rotating sunlit planet with 6 angled rooftop solar arrays and orbiting sun)
+  4. **SANGYAN Shield** — Cybersecurity Fortress (`CyberFortressWorld.jsx`: sculpted 3D extruded shield emblem, scanning ring, and 6 hexagonal firewall plates)
+  5. **Chandrayaan-2 Image Correspondence** — Lunar Research Station (`LunarStationWorld.jsx`: procedurally cratered lunar terrain with low-angle dynamic sunlight and orbiting optical scan probe — explicitly labeled *Research Direction / Proposed Pipeline*)
+  6. **SkillHub** — Builder’s Workshop (`BuilderWorkshopWorld.jsx`: blueprint grid table, modular illuminated blocks, and interlocking workshop gears)
+- Built `src/ui/ProjectPanel.jsx` with a 6-world selector bar, Prev/Next navigation, verified problem statements, CV-accurate highlights, technology tags, verified hackathon awards, verified Chandrayaan-2 GitHub repo link, and zero fabricated metrics/screenshots.
 
 ### M5 — Achievement Hall & Contact Portal
 - **Achievement Hall:** Verified hackathons, certification, and continuous-learning gallery.

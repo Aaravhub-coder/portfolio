@@ -31,6 +31,12 @@ Every external or generated media asset (3D models, textures, fonts, audio, icon
 | Destination World Chamber Backdrop | Procedural 3D Torus & Core Geometry | `src/scenes/WorldChamberBackdrop.jsx` | Original (project codebase) | Project-owned | No | Active in M2 |
 | Ancient Library Archive, 120 Instanced Books & Hinged Tome | Procedural 3D Geometry (`InstancedMesh`, stone bays, candle orbs) | `src/scenes/LibraryScene.jsx` | Original (project codebase) | Project-owned | No | Active in M3 |
 | AI Laboratory 4-Layer Neural Network Hologram | Procedural 3D Geometry (`LineSegments`, skill nodes, containment rings) | `src/scenes/AILabScene.jsx` | Original (project codebase) | Project-owned | No | Active in M3 |
+| Financial Data Universe (`StockUniverseWorld`) | Procedural 3D Geometry (`InstancedMesh` bars, `TubeGeometry`, beacons) | `src/three/models/StockUniverseWorld.jsx` | Original (project codebase) | Project-owned | No | Active in M4 |
+| Data-Matching Laboratory (`EntityMatchingWorld`) | Procedural 3D Geometry (`LineSegments`, record clusters, prism) | `src/three/models/EntityMatchingWorld.jsx` | Original (project codebase) | Project-owned | No | Active in M4 |
+| Solar Planet (`SolarPlanetWorld`) | Procedural 3D Geometry (faceted planet, solar arrays, orbiting sun) | `src/three/models/SolarPlanetWorld.jsx` | Original (project codebase) | Project-owned | No | Active in M4 |
+| Cybersecurity Fortress (`CyberFortressWorld`) | Procedural 3D Geometry (`ExtrudeGeometry` shield, firewall plates) | `src/three/models/CyberFortressWorld.jsx` | Original (project codebase) | Project-owned | No | Active in M4 |
+| Lunar Research Station (`LunarStationWorld`) | Procedural 3D Geometry (cratered heightfield terrain, optical orbiter) | `src/three/models/LunarStationWorld.jsx` | Original (project codebase) | Project-owned | No | Active in M4 |
+| Builder’s Workshop (`BuilderWorkshopWorld`) | Procedural 3D Geometry (blueprint grid, modular blocks, gears) | `src/three/models/BuilderWorkshopWorld.jsx` | Original (project codebase) | Project-owned | No | Active in M4 |
 
 _No external GLB/GLTF models added yet._
 

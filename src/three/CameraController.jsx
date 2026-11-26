@@ -19,7 +19,9 @@ export default function CameraController() {
   const lookTargetRef = useRef(new THREE.Vector3(0, 0.08, 0));
 
   const isSplitWorld =
-    activeScene === SCENES.LIBRARY || activeScene === SCENES.AILAB;
+    activeScene === SCENES.LIBRARY ||
+    activeScene === SCENES.AILAB ||
+    activeScene === SCENES.PROJECTS;
   const useDesktopSplitOffset =
     isSplitWorld && !panelHidden && size.width >= 960;
 
@@ -46,6 +48,10 @@ export default function CameraController() {
       targetX = useDesktopSplitOffset ? 1.25 : 0;
       targetY = isNarrow ? 1.9 : 1.55;
       targetZ = isNarrow ? 7.9 : 5.85;
+    } else if (activeScene === SCENES.PROJECTS) {
+      targetX = useDesktopSplitOffset ? 1.35 : 0;
+      targetY = isNarrow ? 2.35 : 2.05;
+      targetZ = isNarrow ? 8.6 : 6.35;
     } else {
       targetY = isNarrow ? 1.05 : 0.85;
       targetZ = isNarrow ? 8.4 : 6.4;
@@ -165,6 +171,10 @@ export default function CameraController() {
       targetLookX = useDesktopSplitOffset ? 1.15 : 0;
       targetLookY = 1.15;
       targetLookZ = -0.35;
+    } else if (activeScene === SCENES.PROJECTS) {
+      targetLookX = useDesktopSplitOffset ? 1.2 : 0;
+      targetLookY = 1.02;
+      targetLookZ = -0.3;
     } else if (activeScene !== SCENES.GATEWAY) {
       targetLookY = 0.72;
       targetLookZ = -1.5;

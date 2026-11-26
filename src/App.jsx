@@ -6,6 +6,7 @@ import SceneTransition from './components/SceneTransition.jsx';
 import HeroOverlay from './ui/HeroOverlay.jsx';
 import AboutPanel from './ui/AboutPanel.jsx';
 import SkillsPanel from './ui/SkillsPanel.jsx';
+import ProjectPanel from './ui/ProjectPanel.jsx';
 import { usePrefersReducedMotion } from './hooks/usePrefersReducedMotion.js';
 import { useSceneTransition } from './hooks/useSceneTransition.js';
 import { SCENES, useExperienceStore } from './store/experienceStore.js';
@@ -58,8 +59,14 @@ export default function App() {
           />
         )}
 
+        {activeScene === SCENES.PROJECTS && (
+          <ProjectPanel
+            onReturnHub={returnToHub}
+            onSelectPortal={openPortal}
+          />
+        )}
+
         {(activeScene === SCENES.GATEWAY ||
-          activeScene === SCENES.PROJECTS ||
           activeScene === SCENES.ACHIEVEMENTS ||
           activeScene === SCENES.CONTACT) && (
           <HeroOverlay
