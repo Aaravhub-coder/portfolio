@@ -46,7 +46,7 @@ Typography: `Cinzel` (display), `Manrope` (UI/body), `DM Mono` (labels/metadata)
 - **AI Laboratory (`src/scenes/AILabScene.jsx` + `src/ui/SkillsPanel.jsx`):** Built a cyan holographic research platform with an interactive 4-layer 3D neural network (`18` skill nodes + `1` `LineSegments` synaptic web draw call) synced two-way with category filters and honest familiarity tags from `src/data/skills.js`.
 - Added split-stage desktop camera framing and a `"Hide Panel / Inspect 3D"` toggle so visitors can admire both 3D worlds unobstructed or browse recruiter-friendly readable panels in 3D or 2D mode.
 
-### M4 — Project Worlds (6 Environments) *(Completed — Pending Owner Review)*
+### M4 — Project Worlds (6 Environments) *(Completed & Pushed — `ee87c4b`)*
 - Built six lazy-loaded procedural 3D visual environments under `src/three/models/` mounted one at a time by `src/scenes/ProjectWorldScene.jsx`:
   1. **AI Fake Stock Detector** — Financial Data Universe (`StockUniverseWorld.jsx`: 26 instanced bars + trend curve + pulsing anomaly beacons)
   2. **Business Entity Resolution** — Data-Matching Laboratory (`EntityMatchingWorld.jsx`: twin record clouds linked via similarity bridges to a central matching prism)
@@ -56,9 +56,9 @@ Typography: `Cinzel` (display), `Manrope` (UI/body), `DM Mono` (labels/metadata)
   6. **SkillHub** — Builder’s Workshop (`BuilderWorkshopWorld.jsx`: blueprint grid table, modular illuminated blocks, and interlocking workshop gears)
 - Built `src/ui/ProjectPanel.jsx` with a 6-world selector bar, Prev/Next navigation, verified problem statements, CV-accurate highlights, technology tags, verified hackathon awards, verified Chandrayaan-2 GitHub repo link, and zero fabricated metrics/screenshots.
 
-### M5 — Achievement Hall & Contact Portal
-- **Achievement Hall:** Verified hackathons, certification, and continuous-learning gallery.
-- **Contact Portal:** Working `mailto:`, GitHub, and LinkedIn links plus return-to-hub navigation.
+### M5 — Achievement Hall & Contact Portal *(Completed — Pending Owner Review)*
+- **Achievement Hall (`src/scenes/AchievementScene.jsx` + `src/ui/AchievementPanel.jsx`):** Built a ceremonial 3D honors gallery with six illuminated antique-gold/plum/cyan trophy & certificate pedestals synced two-way with filterable cards (`All`, `Hackathons`, `Certification`, `Learning`) strictly reflecting Aarav’s verified CV achievements (no invented dates or IDs).
+- **Contact Portal (`src/scenes/ContactScene.jsx` + `src/ui/ContactPanel.jsx`):** Built a 3D dimensional communication beacon with expanding cyan signal rings and three orbiting channel relay nodes synced with working `mailto:aaravrajgo@gmail.com` (+ Copy Email button), GitHub, LinkedIn, Return-to-Hub, and Return-to-Gateway actions.
 
 ### M6 — Optimization, QA & Deployment Prep
 - Measure draw calls, particle budgets, frame rate, and memory on Apple M1 / 8 GB.

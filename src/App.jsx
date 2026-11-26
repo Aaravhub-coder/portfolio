@@ -7,6 +7,8 @@ import HeroOverlay from './ui/HeroOverlay.jsx';
 import AboutPanel from './ui/AboutPanel.jsx';
 import SkillsPanel from './ui/SkillsPanel.jsx';
 import ProjectPanel from './ui/ProjectPanel.jsx';
+import AchievementPanel from './ui/AchievementPanel.jsx';
+import ContactPanel from './ui/ContactPanel.jsx';
 import { usePrefersReducedMotion } from './hooks/usePrefersReducedMotion.js';
 import { useSceneTransition } from './hooks/useSceneTransition.js';
 import { SCENES, useExperienceStore } from './store/experienceStore.js';
@@ -38,6 +40,10 @@ export default function App() {
           onReturnGateway={returnToGateway}
         />
 
+        {activeScene === SCENES.GATEWAY && (
+          <HeroOverlay onEnterGateway={enterMultiverse} />
+        )}
+
         {activeScene === SCENES.HUB && (
           <PortalLabel
             onSelectPortal={openPortal}
@@ -66,13 +72,17 @@ export default function App() {
           />
         )}
 
-        {(activeScene === SCENES.GATEWAY ||
-          activeScene === SCENES.ACHIEVEMENTS ||
-          activeScene === SCENES.CONTACT) && (
-          <HeroOverlay
-            onEnterGateway={enterMultiverse}
+        {activeScene === SCENES.ACHIEVEMENTS && (
+          <AchievementPanel
             onReturnHub={returnToHub}
             onSelectPortal={openPortal}
+          />
+        )}
+
+        {activeScene === SCENES.CONTACT && (
+          <ContactPanel
+            onReturnHub={returnToHub}
+            onReturnGateway={returnToGateway}
           />
         )}
       </div>

@@ -28,10 +28,13 @@ export const useExperienceStore = create((set) => ({
   webglError: null,
   reducedMotion: getInitialReducedMotion(),
 
-  // M3 World-specific interactive state
-  activeLibraryChapter: 'chronicle', // 'chronicle' | 'education'
+  // World-specific interactive state (M3–M5)
+  activeLibraryChapter: 'chronicle',
   selectedSkillCategory: 'all',
   highlightedSkill: null,
+  selectedAchievementId: null,
+  achievementFilter: 'all',
+  hoveredContactChannel: null,
   panelHidden: false,
 
   navigateTo: (scene, projectId = null) =>
@@ -41,6 +44,8 @@ export const useExperienceStore = create((set) => ({
       hoveredPortal: null,
       panelHidden: false,
       highlightedSkill: null,
+      selectedAchievementId: null,
+      hoveredContactChannel: null,
     }),
 
   selectProject: (projectId) =>
@@ -56,6 +61,8 @@ export const useExperienceStore = create((set) => ({
       activeProjectId: null,
       hoveredPortal: null,
       panelHidden: false,
+      selectedAchievementId: null,
+      hoveredContactChannel: null,
     }),
 
   returnToGateway: () =>
@@ -90,5 +97,11 @@ export const useExperienceStore = create((set) => ({
   setSelectedSkillCategory: (selectedSkillCategory) =>
     set({ selectedSkillCategory, highlightedSkill: null }),
   setHighlightedSkill: (highlightedSkill) => set({ highlightedSkill }),
+  setSelectedAchievementId: (selectedAchievementId) =>
+    set({ selectedAchievementId }),
+  setAchievementFilter: (achievementFilter) =>
+    set({ achievementFilter, selectedAchievementId: null }),
+  setHoveredContactChannel: (hoveredContactChannel) =>
+    set({ hoveredContactChannel }),
   togglePanelHidden: () => set((state) => ({ panelHidden: !state.panelHidden })),
 }));

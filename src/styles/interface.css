@@ -1582,6 +1582,216 @@
   gap: 0.4rem;
 }
 
+/* M5 Achievement Hall & Contact Portal Panels */
+.world-panel--achievements {
+  background: linear-gradient(
+    180deg,
+    rgba(35, 22, 41, 0.9) 0%,
+    rgba(16, 13, 22, 0.94) 100%
+  );
+  border-color: rgba(231, 189, 114, 0.42);
+}
+
+.world-panel--contact {
+  background: linear-gradient(
+    180deg,
+    rgba(19, 24, 38, 0.9) 0%,
+    rgba(16, 13, 22, 0.94) 100%
+  );
+  border-color: rgba(131, 217, 220, 0.4);
+}
+
+.world-panel--contact .world-panel__title {
+  color: var(--color-ai-cyan);
+}
+
+.achievement-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.achievement-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.78rem;
+  width: 100%;
+  padding: 0.8rem 0.92rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: rgba(16, 13, 22, 0.64);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) var(--ease-smooth),
+    background-color var(--duration-fast) var(--ease-smooth),
+    transform var(--duration-fast) var(--ease-smooth);
+}
+
+.achievement-card:hover,
+.achievement-card--active {
+  border-color: var(--color-ancient-gold);
+  background: rgba(231, 189, 114, 0.11);
+  transform: translateY(-1px);
+}
+
+.achievement-card__icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid var(--border-gold);
+  background: rgba(33, 23, 43, 0.78);
+  color: var(--color-ancient-gold);
+}
+
+.achievement-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.achievement-card__meta {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-ai-cyan);
+}
+
+.achievement-card__title {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--color-parchment);
+}
+
+.achievement-card__detail {
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+}
+
+.contact-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.88rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: rgba(16, 13, 22, 0.68);
+  transition:
+    border-color var(--duration-fast) var(--ease-smooth),
+    background-color var(--duration-fast) var(--ease-smooth),
+    transform var(--duration-fast) var(--ease-smooth);
+}
+
+.contact-card--link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.contact-card--link:hover {
+  text-decoration: none;
+}
+
+.contact-card:hover,
+.contact-card--active {
+  border-color: var(--color-ai-cyan);
+  background: rgba(131, 217, 220, 0.1);
+  transform: translateY(-1px);
+}
+
+.contact-card__main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.contact-card__main:hover {
+  text-decoration: none;
+}
+
+.contact-card__icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid var(--border-cyan);
+  background: rgba(33, 23, 43, 0.8);
+  color: var(--color-ai-cyan);
+}
+
+.contact-card__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.contact-card__label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ancient-gold);
+}
+
+.contact-card__value {
+  font-size: 0.9rem;
+  color: var(--color-parchment);
+  word-break: break-all;
+}
+
+.contact-card__hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.contact-card__ext {
+  flex-shrink: 0;
+  color: var(--color-ai-cyan);
+}
+
+.contact-copy-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.42rem 0.72rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-gold);
+  background: rgba(33, 23, 43, 0.85);
+  color: var(--color-ancient-gold);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.contact-copy-btn--copied {
+  border-color: var(--color-ai-cyan);
+  color: var(--color-ai-cyan);
+}
+
+.contact-signoff {
+  margin-top: 1.1rem;
+}
+
 @media (max-width: 959px) {
   .world-split-layout {
     display: flex;

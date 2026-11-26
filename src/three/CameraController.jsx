@@ -21,7 +21,9 @@ export default function CameraController() {
   const isSplitWorld =
     activeScene === SCENES.LIBRARY ||
     activeScene === SCENES.AILAB ||
-    activeScene === SCENES.PROJECTS;
+    activeScene === SCENES.PROJECTS ||
+    activeScene === SCENES.ACHIEVEMENTS ||
+    activeScene === SCENES.CONTACT;
   const useDesktopSplitOffset =
     isSplitWorld && !panelHidden && size.width >= 960;
 
@@ -52,6 +54,14 @@ export default function CameraController() {
       targetX = useDesktopSplitOffset ? 1.35 : 0;
       targetY = isNarrow ? 2.35 : 2.05;
       targetZ = isNarrow ? 8.6 : 6.35;
+    } else if (activeScene === SCENES.ACHIEVEMENTS) {
+      targetX = useDesktopSplitOffset ? 1.35 : 0;
+      targetY = isNarrow ? 2.15 : 1.82;
+      targetZ = isNarrow ? 8.8 : 6.3;
+    } else if (activeScene === SCENES.CONTACT) {
+      targetX = useDesktopSplitOffset ? 1.3 : 0;
+      targetY = isNarrow ? 1.85 : 1.52;
+      targetZ = isNarrow ? 8.2 : 5.95;
     } else {
       targetY = isNarrow ? 1.05 : 0.85;
       targetZ = isNarrow ? 8.4 : 6.4;
@@ -175,6 +185,14 @@ export default function CameraController() {
       targetLookX = useDesktopSplitOffset ? 1.2 : 0;
       targetLookY = 1.02;
       targetLookZ = -0.3;
+    } else if (activeScene === SCENES.ACHIEVEMENTS) {
+      targetLookX = useDesktopSplitOffset ? 1.25 : 0;
+      targetLookY = 1.12;
+      targetLookZ = -0.75;
+    } else if (activeScene === SCENES.CONTACT) {
+      targetLookX = useDesktopSplitOffset ? 1.15 : 0;
+      targetLookY = 1.16;
+      targetLookZ = -0.25;
     } else if (activeScene !== SCENES.GATEWAY) {
       targetLookY = 0.72;
       targetLookZ = -1.5;

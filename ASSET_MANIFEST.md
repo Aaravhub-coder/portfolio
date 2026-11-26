@@ -37,6 +37,8 @@ Every external or generated media asset (3D models, textures, fonts, audio, icon
 | Cybersecurity Fortress (`CyberFortressWorld`) | Procedural 3D Geometry (`ExtrudeGeometry` shield, firewall plates) | `src/three/models/CyberFortressWorld.jsx` | Original (project codebase) | Project-owned | No | Active in M4 |
 | Lunar Research Station (`LunarStationWorld`) | Procedural 3D Geometry (cratered heightfield terrain, optical orbiter) | `src/three/models/LunarStationWorld.jsx` | Original (project codebase) | Project-owned | No | Active in M4 |
 | Builder’s Workshop (`BuilderWorkshopWorld`) | Procedural 3D Geometry (blueprint grid, modular blocks, gears) | `src/three/models/BuilderWorkshopWorld.jsx` | Original (project codebase) | Project-owned | No | Active in M4 |
+| Achievement Hall Honors Gallery & 6 Trophy Pedestals | Procedural 3D Geometry (ceremonial arch, pedestals, trophy/certificate emblems) | `src/scenes/AchievementScene.jsx` | Original (project codebase) | Project-owned | No | Active in M5 |
+| Contact Portal Dimensional Beacon & Relay Nodes | Procedural 3D Geometry (astrolabe beacon, pulse rings, 3 channel relays) | `src/scenes/ContactScene.jsx` | Original (project codebase) | Project-owned | No | Active in M5 |
 
 _No external GLB/GLTF models added yet._
 
