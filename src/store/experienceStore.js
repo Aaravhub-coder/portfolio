@@ -21,24 +21,33 @@ export const useExperienceStore = create((set) => ({
   hoveredPortal: null,
   isTransitioning: false,
   transitionLabel: '',
-  transitionFocus: null, // Optional [x, y, z] 3D portal target for GSAP camera dive
+  transitionFocus: null,
   canvasReady: false,
   audioEnabled: false, // Strictly muted by default per brief
   viewMode: '3d', // Falls back to '2d' on WebGL failure or user preference
   webglError: null,
   reducedMotion: getInitialReducedMotion(),
 
+  // M3 World-specific interactive state
+  activeLibraryChapter: 'chronicle', // 'chronicle' | 'education'
+  selectedSkillCategory: 'all',
+  highlightedSkill: null,
+  panelHidden: false,
+
   navigateTo: (scene, projectId = null) =>
     set({
       activeScene: scene,
       activeProjectId: projectId,
       hoveredPortal: null,
+      panelHidden: false,
+      highlightedSkill: null,
     }),
 
   selectProject: (projectId) =>
     set({
       activeScene: SCENES.PROJECTS,
       activeProjectId: projectId,
+      panelHidden: false,
     }),
 
   returnToHub: () =>
@@ -46,6 +55,7 @@ export const useExperienceStore = create((set) => ({
       activeScene: SCENES.HUB,
       activeProjectId: null,
       hoveredPortal: null,
+      panelHidden: false,
     }),
 
   returnToGateway: () =>
@@ -53,6 +63,7 @@ export const useExperienceStore = create((set) => ({
       activeScene: SCENES.GATEWAY,
       activeProjectId: null,
       hoveredPortal: null,
+      panelHidden: false,
     }),
 
   setHoveredPortal: (portalId) => set({ hoveredPortal: portalId }),
@@ -68,4 +79,16 @@ export const useExperienceStore = create((set) => ({
       canvasReady: true,
     }),
   setReducedMotion: (reducedMotion) => set({ reducedMotion }),
+
+  setActiveLibraryChapter: (activeLibraryChapter) =>
+    set({ activeLibraryChapter }),
+  toggleLibraryChapter: () =>
+    set((state) => ({
+      activeLibraryChapter:
+        state.activeLibraryChapter === 'chronicle' ? 'education' : 'chronicle',
+    })),
+  setSelectedSkillCategory: (selectedSkillCategory) =>
+    set({ selectedSkillCategory, highlightedSkill: null }),
+  setHighlightedSkill: (highlightedSkill) => set({ highlightedSkill }),
+  togglePanelHidden: () => set((state) => ({ panelHidden: !state.panelHidden })),
 }));

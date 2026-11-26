@@ -12,10 +12,16 @@ export default function CameraController() {
   const isTransitioning = useExperienceStore((s) => s.isTransitioning);
   const transitionFocus = useExperienceStore((s) => s.transitionFocus);
   const reducedMotion = useExperienceStore((s) => s.reducedMotion);
+  const panelHidden = useExperienceStore((s) => s.panelHidden);
 
   const pointerRef = useRef({ x: 0, y: 0 });
   const basePosRef = useRef({ x: 0, y: 0.08, z: 7.2 });
   const lookTargetRef = useRef(new THREE.Vector3(0, 0.08, 0));
+
+  const isSplitWorld =
+    activeScene === SCENES.LIBRARY || activeScene === SCENES.AILAB;
+  const useDesktopSplitOffset =
+    isSplitWorld && !panelHidden && size.width >= 960;
 
   useEffect(() => {
     const aspect = size.width / Math.max(size.height, 1);
@@ -32,6 +38,14 @@ export default function CameraController() {
     } else if (activeScene === SCENES.HUB) {
       targetY = isNarrow ? 1.85 : 1.48;
       targetZ = isNarrow ? 11.8 : isMedium ? 9.1 : 7.35;
+    } else if (activeScene === SCENES.LIBRARY) {
+      targetX = useDesktopSplitOffset ? 1.3 : 0;
+      targetY = isNarrow ? 2.05 : 1.72;
+      targetZ = isNarrow ? 7.6 : 5.75;
+    } else if (activeScene === SCENES.AILAB) {
+      targetX = useDesktopSplitOffset ? 1.25 : 0;
+      targetY = isNarrow ? 1.9 : 1.55;
+      targetZ = isNarrow ? 7.9 : 5.85;
     } else {
       targetY = isNarrow ? 1.05 : 0.85;
       targetZ = isNarrow ? 8.4 : 6.4;
@@ -49,13 +63,20 @@ export default function CameraController() {
       x: targetX,
       y: targetY,
       z: targetZ,
-      duration: 1.05,
+      duration: 1.0,
       ease: 'power3.out',
       overwrite: 'auto',
     });
 
     return () => tween.kill();
-  }, [activeScene, size.width, size.height, reducedMotion, camera]);
+  }, [
+    activeScene,
+    size.width,
+    size.height,
+    reducedMotion,
+    camera,
+    useDesktopSplitOffset,
+  ]);
 
   useEffect(() => {
     if (!isTransitioning || reducedMotion) return undefined;
@@ -102,7 +123,7 @@ export default function CameraController() {
 
   useFrame((_, delta) => {
     const smooth = 1 - Math.exp(-Math.min(delta, 0.05) * 4.2);
-    const parallaxScale = reducedMotion || isTransitioning ? 0 : 0.34;
+    const parallaxScale = reducedMotion || isTransitioning ? 0 : 0.3;
 
     const focusedPortal =
       activeScene === SCENES.HUB && hoveredPortal
@@ -117,7 +138,7 @@ export default function CameraController() {
     const desiredX =
       basePosRef.current.x + hoverShiftX + pointerRef.current.x * parallaxScale;
     const desiredY =
-      basePosRef.current.y + pointerRef.current.y * parallaxScale * 0.5;
+      basePosRef.current.y + pointerRef.current.y * parallaxScale * 0.45;
     const desiredZ = basePosRef.current.z;
 
     camera.position.x = THREE.MathUtils.lerp(camera.position.x, desiredX, smooth);
@@ -136,6 +157,14 @@ export default function CameraController() {
       targetLookX = focusedPortal ? focusedPortal.position[0] * 0.35 : 0;
       targetLookY = focusedPortal ? focusedPortal.position[1] - 0.28 : 0.72;
       targetLookZ = -1.2;
+    } else if (activeScene === SCENES.LIBRARY) {
+      targetLookX = useDesktopSplitOffset ? 1.15 : 0;
+      targetLookY = 1.25;
+      targetLookZ = -0.65;
+    } else if (activeScene === SCENES.AILAB) {
+      targetLookX = useDesktopSplitOffset ? 1.15 : 0;
+      targetLookY = 1.15;
+      targetLookZ = -0.35;
     } else if (activeScene !== SCENES.GATEWAY) {
       targetLookY = 0.72;
       targetLookZ = -1.5;

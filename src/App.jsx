@@ -4,6 +4,8 @@ import PortalLabel from './components/PortalLabel.jsx';
 import LoadingScreen from './components/LoadingScreen.jsx';
 import SceneTransition from './components/SceneTransition.jsx';
 import HeroOverlay from './ui/HeroOverlay.jsx';
+import AboutPanel from './ui/AboutPanel.jsx';
+import SkillsPanel from './ui/SkillsPanel.jsx';
 import { usePrefersReducedMotion } from './hooks/usePrefersReducedMotion.js';
 import { useSceneTransition } from './hooks/useSceneTransition.js';
 import { SCENES, useExperienceStore } from './store/experienceStore.js';
@@ -35,12 +37,31 @@ export default function App() {
           onReturnGateway={returnToGateway}
         />
 
-        {activeScene === SCENES.HUB ? (
+        {activeScene === SCENES.HUB && (
           <PortalLabel
             onSelectPortal={openPortal}
             onReturnGateway={returnToGateway}
           />
-        ) : (
+        )}
+
+        {activeScene === SCENES.LIBRARY && (
+          <AboutPanel
+            onReturnHub={returnToHub}
+            onSelectPortal={openPortal}
+          />
+        )}
+
+        {activeScene === SCENES.AILAB && (
+          <SkillsPanel
+            onReturnHub={returnToHub}
+            onSelectPortal={openPortal}
+          />
+        )}
+
+        {(activeScene === SCENES.GATEWAY ||
+          activeScene === SCENES.PROJECTS ||
+          activeScene === SCENES.ACHIEVEMENTS ||
+          activeScene === SCENES.CONTACT) && (
           <HeroOverlay
             onEnterGateway={enterMultiverse}
             onReturnHub={returnToHub}

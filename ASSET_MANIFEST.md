@@ -29,6 +29,8 @@ Every external or generated media asset (3D models, textures, fonts, audio, icon
 | 2D Fallback Astrolabe Portal | Inline SVG | `src/ui/HeroOverlay.jsx` | Original (project codebase) | Project-owned | No | Active in M1 |
 | Multiverse Hub Sanctuary & 5 Dimensional Portals | Procedural 3D Geometry + GLSL Vortex Shader | `src/scenes/MultiverseScene.jsx`, `src/components/Portal.jsx` | Original (project codebase) | Project-owned | No | Active in M2 |
 | Destination World Chamber Backdrop | Procedural 3D Torus & Core Geometry | `src/scenes/WorldChamberBackdrop.jsx` | Original (project codebase) | Project-owned | No | Active in M2 |
+| Ancient Library Archive, 120 Instanced Books & Hinged Tome | Procedural 3D Geometry (`InstancedMesh`, stone bays, candle orbs) | `src/scenes/LibraryScene.jsx` | Original (project codebase) | Project-owned | No | Active in M3 |
+| AI Laboratory 4-Layer Neural Network Hologram | Procedural 3D Geometry (`LineSegments`, skill nodes, containment rings) | `src/scenes/AILabScene.jsx` | Original (project codebase) | Project-owned | No | Active in M3 |
 
 _No external GLB/GLTF models added yet._
 

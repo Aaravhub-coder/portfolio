@@ -35,15 +35,16 @@ Typography: `Cinzel` (display), `Manrope` (UI/body), `DM Mono` (labels/metadata)
 - Built procedural cosmic Gateway scene (`src/scenes/GatewayScene.jsx`) featuring ancient gold astrolabe ring with 36 instanced dial ticks, royal purple dimensional arcs, custom Apple-M1-safe GLSL portal vortex disc, cyan holographic AI circuit ring with 12 instanced nodes, sculptural beveled 3D `AR` monogram, and 640-particle starfield/energy motes (`src/three/Particles.jsx`).
 - Built responsive pointer parallax & GSAP portal-entry camera dive (`src/three/CameraController.jsx`), cinematic Hero Overlay (`src/ui/HeroOverlay.jsx`), branded loading screen (`src/components/LoadingScreen.jsx`), transition veil (`src/components/SceneTransition.jsx`), and muted-by-default procedural Web Audio controller (`src/components/AudioController.jsx`).
 
-### M2 — Multiverse Hub *(Completed — Pending Owner Review)*
+### M2 — Multiverse Hub *(Completed & Pushed — `0edf900`)*
 - Built central cosmic observatory sanctuary (`src/scenes/MultiverseScene.jsx`) with a rotating gold/purple/cyan floor dais, five radial energy conduits, and five reusable procedural 3D portals (`src/components/Portal.jsx`) sharing core ring/plinth geometries for low draw-call overhead.
 - Each portal represents a distinct realm with a custom procedural sigil, themed GLSL vortex shader, hover/focus illumination, and world-anchored desktop badge: **Ancient Library**, **AI Laboratory**, **Project Worlds**, **Achievement Hall**, and **Contact Portal**.
 - Added persistent accessible top navigation (`src/components/Navigation.jsx`) with quick-jump realm links, Return-to-Hub button, Escape-key shortcut, and synced bottom Portal Dock & Inspector (`src/components/PortalLabel.jsx`) with arrow-key navigation and full 2D Hub fallback mode.
 - Upgraded `CameraController.jsx` and `CanvasExperience.jsx` with portal-focused hover tracking, portal-directed GSAP camera dives, and lazy-loaded (`React.lazy`) single-Canvas world routing across all five destination scenes.
 
-### M3 — Ancient Library & AI Laboratory
-- **Ancient Library:** Warm stone/shelf archive visuals with readable About, personal story, and verified education panel.
-- **AI Laboratory:** Futuristic cyan holographic neural-network visuals with interactive, honest skill/technology panels.
+### M3 — Ancient Library & AI Laboratory *(Completed — Pending Owner Review)*
+- **Ancient Library (`src/scenes/LibraryScene.jsx` + `src/ui/AboutPanel.jsx`):** Built curved candlelit archive bays with 120 instanced books (1 draw call), flickering floating candle lanterns, an interactive hinged 3D Chronicle Tome that flips between **Profile & Story** and **Education**, and a split-stage glass/parchment panel strictly grounded in Aarav’s CV.
+- **AI Laboratory (`src/scenes/AILabScene.jsx` + `src/ui/SkillsPanel.jsx`):** Built a cyan holographic research platform with an interactive 4-layer 3D neural network (`18` skill nodes + `1` `LineSegments` synaptic web draw call) synced two-way with category filters and honest familiarity tags from `src/data/skills.js`.
+- Added split-stage desktop camera framing and a `"Hide Panel / Inspect 3D"` toggle so visitors can admire both 3D worlds unobstructed or browse recruiter-friendly readable panels in 3D or 2D mode.
 
 ### M4 — Project Worlds (6 Environments)
 - Six lazy-loaded visual environments mapped to Aarav’s verified projects:
