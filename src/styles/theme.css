@@ -1,0 +1,42 @@
+:root {
+  /* Core Palette — Section 3.1 */
+  --color-midnight: #100d16;
+  --color-mystic-plum: #21172b;
+  --color-royal-purple: #56334d;
+  --color-ancient-gold: #e7bd72;
+  --color-ai-cyan: #83d9dc;
+  --color-parchment: #f6f0e6;
+
+  /* Semantic Surfaces & Borders */
+  --surface-canvas: var(--color-midnight);
+  --surface-panel: rgba(33, 23, 43, 0.86);
+  --surface-panel-strong: rgba(22, 16, 30, 0.94);
+  --surface-pill: rgba(86, 51, 77, 0.35);
+  --border-gold: rgba(231, 189, 114, 0.32);
+  --border-cyan: rgba(131, 217, 220, 0.36);
+  --border-subtle: rgba(246, 240, 230, 0.14);
+
+  /* Text Hierarchy */
+  --text-primary: var(--color-parchment);
+  --text-secondary: rgba(246, 240, 230, 0.78);
+  --text-muted: rgba(246, 240, 230, 0.56);
+
+  /* Typography — Section 3.2 (resilient system fallbacks) */
+  --font-display: 'Cinzel', Georgia, 'Times New Roman', serif;
+  --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-quote: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+
+  /* Radii & Shadows */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --shadow-panel: 0 20px 60px rgba(6, 4, 10, 0.65);
+  --glow-gold: 0 0 24px rgba(231, 189, 114, 0.28);
+  --glow-cyan: 0 0 24px rgba(131, 217, 220, 0.25);
+
+  /* Transitions */
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 180ms;
+  --duration-base: 320ms;
+}

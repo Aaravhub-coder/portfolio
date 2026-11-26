@@ -1,0 +1,101 @@
+.m0-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+}
+
+.m0-card {
+  width: 100%;
+  max-width: 760px;
+  padding: 2.5rem;
+  border-radius: var(--radius-lg);
+  background: var(--surface-panel);
+  border: 1px solid var(--border-gold);
+  box-shadow: var(--shadow-panel);
+  backdrop-filter: blur(14px);
+}
+
+.m0-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ai-cyan);
+  background: rgba(131, 217, 220, 0.1);
+  border: 1px solid var(--border-cyan);
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  margin-bottom: 1.25rem;
+}
+
+.m0-title {
+  font-size: clamp(1.8rem, 4vw, 2.75rem);
+  color: var(--color-ancient-gold);
+  letter-spacing: 0.08em;
+}
+
+.m0-subtitle {
+  margin-top: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  color: var(--color-ai-cyan);
+}
+
+.m0-quote {
+  margin-top: 1.4rem;
+  font-family: var(--font-quote);
+  font-style: italic;
+  font-size: 1.35rem;
+  color: var(--color-parchment);
+}
+
+.m0-copy {
+  margin-top: 1rem;
+  color: var(--text-secondary);
+}
+
+.m0-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.85rem;
+  margin-top: 1.75rem;
+}
+
+.m0-stat {
+  padding: 0.95rem 1rem;
+  border-radius: var(--radius-md);
+  background: rgba(16, 13, 22, 0.65);
+  border: 1px solid var(--border-subtle);
+}
+
+.m0-stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.m0-stat-value {
+  margin-top: 0.25rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--color-ancient-gold);
+}
+
+.m0-footer {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
