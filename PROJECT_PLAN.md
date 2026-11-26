@@ -24,16 +24,16 @@ Typography: `Cinzel` (display), `Manrope` (UI/body), `DM Mono` (labels/metadata)
 
 ## Milestone Roadmap
 
-### M0 — Project Audit & Architecture *(Completed — Pending Owner Review)*
+### M0 — Project Audit & Architecture *(Completed & Pushed — `3b8a43e`)*
 - Audited workspace (`/Users/aaravraj/Desktop/portfolio`), Node `v26.10.0`, npm `11.19.1`, Git `2.52.0`, remote URL (`origin` leading whitespace fixed), and free disk space (`51 GiB`).
 - Verified and installed compatible stack: `react@^19.3.1`, `react-dom@^19.3.1`, `vite@^8.4.0`, `@vitejs/plugin-react@^6.3.0`, `three@^0.187.0`, `@react-three/fiber@^9.8.2`, `@react-three/drei@^10.7.9`, `gsap@^3.15.1`, `zustand@^5.1.0`, `lucide-react@^1.81.0` (0 npm vulnerabilities).
 - Scaffolded folder structure, design tokens, Zustand state store, verified `src/data/` content modules, and documentation (`README.md`, `PROJECT_PLAN.md`, `ASSET_MANIFEST.md`, `AGENTS.md`).
-- Verified clean production build (`npm run build`).
+- Verified clean production build (`npm run build`) and pushed approved M0 commit to `origin/master`.
 
-### M1 — 3D Gateway
-- Single shared React Three Fiber `<Canvas>` with tab-visibility pause and WebGL error boundary / 2D fallback.
-- Full-screen cosmic Gateway scene with procedural golden/purple/cyan portal rings, central `AR` monogram, floating stars/particles, and subtle pointer parallax.
-- Cinematic hero overlay copy, accessible `ENTER` interaction, loading screen, and optional muted-by-default audio toggle.
+### M1 — 3D Gateway *(Completed — Pending Owner Review)*
+- Built single shared React Three Fiber `<Canvas>` (`src/three/CanvasExperience.jsx`) with lazy loading, tab-visibility render pause (`frameloop`), WebGL capability detection, ErrorBoundary, `webglcontextlost` recovery, and a live 2D fallback toggle.
+- Built procedural cosmic Gateway scene (`src/scenes/GatewayScene.jsx`) featuring ancient gold astrolabe ring with 36 instanced dial ticks, royal purple dimensional arcs, custom Apple-M1-safe GLSL portal vortex disc, cyan holographic AI circuit ring with 12 instanced nodes, sculptural beveled 3D `AR` monogram, and 640-particle starfield/energy motes (`src/three/Particles.jsx`).
+- Built responsive pointer parallax & GSAP portal-entry camera dive (`src/three/CameraController.jsx`), cinematic Hero Overlay (`src/ui/HeroOverlay.jsx`), branded loading screen (`src/components/LoadingScreen.jsx`), transition veil (`src/components/SceneTransition.jsx`), and muted-by-default procedural Web Audio controller (`src/components/AudioController.jsx`).
 
 ### M2 — Multiverse Hub
 - Central 3D hub with five clickable and keyboard/touch-accessible portals: Ancient Library, AI Laboratory, Project Worlds, Achievement Hall, Contact Portal.

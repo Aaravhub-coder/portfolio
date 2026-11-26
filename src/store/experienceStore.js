@@ -20,6 +20,8 @@ export const useExperienceStore = create((set) => ({
   activeProjectId: null,
   hoveredPortal: null,
   isTransitioning: false,
+  transitionLabel: '',
+  canvasReady: false,
   audioEnabled: false, // Strictly muted by default per brief
   viewMode: '3d', // Falls back to '2d' on WebGL failure or user preference
   webglError: null,
@@ -45,14 +47,24 @@ export const useExperienceStore = create((set) => ({
       hoveredPortal: null,
     }),
 
+  returnToGateway: () =>
+    set({
+      activeScene: SCENES.GATEWAY,
+      activeProjectId: null,
+      hoveredPortal: null,
+    }),
+
   setHoveredPortal: (portalId) => set({ hoveredPortal: portalId }),
-  setIsTransitioning: (isTransitioning) => set({ isTransitioning }),
+  setIsTransitioning: (isTransitioning, transitionLabel = '') =>
+    set({ isTransitioning, transitionLabel }),
+  setCanvasReady: (canvasReady) => set({ canvasReady }),
   toggleAudio: () => set((state) => ({ audioEnabled: !state.audioEnabled })),
   setViewMode: (viewMode) => set({ viewMode }),
   setWebglError: (webglError) =>
     set({
       webglError,
       viewMode: webglError ? '2d' : '3d',
+      canvasReady: true,
     }),
   setReducedMotion: (reducedMotion) => set({ reducedMotion }),
 }));
